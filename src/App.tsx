@@ -10,8 +10,6 @@ import {
   Text,
   PortalMaterialType,
   RoundedBox,
-  // Edges,
-  // Backdrop,
 } from "@react-three/drei";
 import { useRoute, useLocation } from "wouter";
 import { geometry, easing } from "maath";
@@ -23,7 +21,6 @@ import {
   NormalBufferAttributes,
   Object3DEventMap,
 } from "three";
-// import { Vector3 } from "three";
 
 extend(geometry);
 
@@ -141,16 +138,6 @@ function PortalBox() {
           </Frame>
         ))}
       </group>
-      {/* <directionalLight intensity={50} position={[0, 50, 25]} />
-    <Backdrop
-      position={[0, -1, -2]}
-      floor={0.75} // Stretches the floor segment, 0.25 by default
-      segments={20} // Mesh-resolution, 20 by default
-      receiveShadow
-      scale={12}
-    >
-      <meshStandardMaterial color="#353540" />
-    </Backdrop> */}
     </>
   );
 }

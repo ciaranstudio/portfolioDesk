@@ -1,3 +1,6 @@
+https://stackoverflow.com/questions/77848891/how-can-i-fix-unable-to-resolve-dependency-tree-while-installing-eslint
+issue with running 'npm i" - dependency resolution issue, installed node modules with 'npm install --legacy-peer-deps' for now (02/22/2024)
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

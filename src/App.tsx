@@ -21,12 +21,13 @@ export const App = () => {
   // const [urlInput, setUrlInput] = useState("");
   // const ref = useRef(null);
   const [height, setHeight] = useState("100dvh");
+  const [dpr, setDpr] = useState(0);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     document.getElementById("footer")!.innerHTML =
       `dpr: ${window.devicePixelRatio}`;
-
+    setDpr(window.devicePixelRatio);
     if (window.devicePixelRatio >= 3) {
       document.getElementById("footer")!.style.color = "red";
     }
@@ -82,7 +83,7 @@ export const App = () => {
         shadows
         dpr={[1, 2]}
         orthographic
-        // camera={{ fov: 75, position: [0, 3, 3] }}
+        camera={{ position: [0, 1, 3] }}
         eventSource={document.getElementById("root")!}
         eventPrefix="client"
       >
@@ -104,7 +105,7 @@ export const App = () => {
                 <Phone />
               </mesh>
               <mesh scale={0.3} position={[0, 0.04, 0]}>
-                <Laptop />
+                <Laptop dpr={dpr} />
               </mesh>
               <mesh rotation={[0, -Math.PI / 2, 0]}>
                 <Desk />
@@ -124,13 +125,14 @@ export const App = () => {
           makeDefault
           enableZoom={true}
           enablePan={false}
+          enableRotate={dpr > 2 ? false : true}
           maxDistance={3}
           minDistance={1.25} // 1.65 on 04/11/2024 // before 04/11/2024 1.75 good on iphone xr portrait // 1.375 // 60
           maxPolarAngle={Math.PI * 2}
           enableDamping={true}
           // autoRotate
           // autoRotateSpeed={0.8}
-          // target={[0, 0.5, 0]}
+          target={[0, 0.35, 0]}
         />
       </Canvas>
     </>

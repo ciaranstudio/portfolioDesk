@@ -9,6 +9,7 @@
     /* Bundler mode */
     "moduleResolution": "node",
     // "allowImportingTsExtensions": true,
+    "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "isolatedModules": false, // was originally set to true, set to false for roundedPlaneGeometry JSX d.ts file
     "noEmit": true,

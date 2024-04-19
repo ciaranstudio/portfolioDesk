@@ -1,4 +1,4 @@
-@import url('https://rsms.me/inter/inter.css');
+@import url("https://rsms.me/inter/inter.css");
 
 * {
   box-sizing: border-box;
@@ -11,12 +11,23 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: grab;
+}
+
+#root:active {
+  cursor: grabbing;
 }
 
 body {
   background: #f0f0f0;
   color: black;
-  font-family: 'Inter';
+  font-family: "Inter";
 }
 
 a {
@@ -42,8 +53,16 @@ svg {
   }
 }
 
-canvas {
+.r3f {
   opacity: 0;
   touch-action: none;
   animation: fade-in 5s ease 1s forwards;
+}
+
+.htmlScreen iframe {
+  width: 1024px;
+  height: 670px;
+  border: none;
+  border-radius: 20px;
+  background: #000000;
 }

@@ -1,9 +1,11 @@
-import { Suspense } from "react";
+import { isSafari } from "react-device-detect";
+import { useState, useRef, useEffect, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import {
+  // CameraControls,
+  Stage,
   OrbitControls,
   // PresentationControls,
-  Stage,
   // Html
 } from "@react-three/drei";
 import Phone from "./Phone";
@@ -18,13 +20,69 @@ export const App = () => {
   // const laptop = useRef<THREE.Group>(null);
   // const [urlInput, setUrlInput] = useState("");
   // const ref = useRef(null);
+  const [height, setHeight] = useState("100dvh");
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    document.getElementById("footer")!.innerHTML =
+      `dpr: ${window.devicePixelRatio}`;
+
+    if (window.devicePixelRatio >= 3) {
+      document.getElementById("footer")!.style.color = "red";
+    }
+    const measureCanvasHeight = () => {
+      let canvasElement = null;
+      let canvasHeight = 0;
+
+      if (canvasRef.current) {
+        canvasElement = canvasRef.current;
+        canvasHeight = canvasElement.clientHeight;
+        document.getElementById("footer")!.innerHTML +=
+          `  canvas height is ${canvasHeight}px`;
+        // if (isSafari && canvasHeight % 2 !== 0)
+        if (canvasHeight % 2 !== 0) {
+          document.getElementById("footer")!.innerHTML +=
+            `  changing height from ${canvasHeight} to ${Math.round(canvasHeight - 1)}px`;
+          setHeight(`Math.round(${canvasHeight - 1})px`);
+          // setHeight(`${canvasHeight - 1}px`);
+          console.log("reducing canvasHight by 1px");
+        }
+
+        console.log("isSafari: ", isSafari);
+        console.log("canvasElement: ", canvasElement);
+        console.log("canvasHeight: ", canvasHeight);
+      }
+    };
+
+    window.requestAnimationFrame(measureCanvasHeight);
+    const handleResize = () => {
+      setHeight("100dvh)");
+      measureCanvasHeight();
+    };
+
+    // if (!isMobile && isSafari) {
+    //   window.addEventListener("resize", handleResize);
+    //   return () => {
+    //     window.removeEventListener("resize", handleResize);
+    //   };
+    // }
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <>
       <Canvas
+        ref={canvasRef}
+        style={{ height: height }}
         className="r3f"
         shadows
         dpr={[1, 2]}
-        camera={{ fov: 75, position: [0, 3, 3] }}
+        orthographic
+        // camera={{ fov: 75, position: [0, 3, 3] }}
         eventSource={document.getElementById("root")!}
         eventPrefix="client"
       >
@@ -61,6 +119,7 @@ export const App = () => {
             </group>
           </Stage>
         </Suspense>
+        {/* <CameraControls /> */}
         <OrbitControls
           makeDefault
           enableZoom={true}

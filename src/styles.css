@@ -20,3 +20,16 @@ body,
   border-radius: 20px;
   background: #000000;
 }
+
+/* #footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background: transparent;
+  opacity: 0.98;
+  color: #2c69aa;
+  padding: 0.25rem;
+  font-size: 3rem;
+  pointer-events: none;
+} */

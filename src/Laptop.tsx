@@ -22,7 +22,7 @@ export default function Laptop2() {
       >
         <Suspense fallback={<div className="text-lg">loading...</div>}>
           <iframe
-            src="https://elibuildslite.web.app"
+            src="https://gardencenter-c902f.web.app"
             title="laptop screen"
             seamless
           />

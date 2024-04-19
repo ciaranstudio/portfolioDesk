@@ -61,7 +61,17 @@ function Root() {
         >
           {params ? "< back" : "drag to spin, tap frames to view"}
         </a>
-      </div>{" "}
+      </div>
+      <div
+        id="footer"
+        style={{
+          position: "absolute",
+          bottom: 30,
+          left: "50%",
+          width: 75,
+          fontSize: "0.75rem",
+        }}
+      ></div>
     </>
   );
 }

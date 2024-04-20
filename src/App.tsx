@@ -1,7 +1,12 @@
 // import { isMobile, isSafari } from "react-device-detect";
 import { useState, useRef, useEffect, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Stage, OrbitControls, MeshDistortMaterial } from "@react-three/drei";
+import {
+  Stage,
+  OrbitControls,
+  MeshDistortMaterial,
+  useCursor,
+} from "@react-three/drei";
 import Phone from "./Phone";
 import Desk from "./Desk";
 import Laptop from "./Laptop";
@@ -18,6 +23,8 @@ export const App = () => {
   const [height, setHeight] = useState("100dvh");
   const [dpr, setDpr] = useState(0);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [hovered, hover] = useState(false);
+  useCursor(hovered);
 
   useEffect(() => {
     // document.getElementById("footer")!.innerHTML =
@@ -98,6 +105,8 @@ export const App = () => {
                   e.stopPropagation();
                   setUrl("https://partlist-e9fc0.web.app");
                 }}
+                onPointerOver={() => hover(true)}
+                onPointerOut={() => hover(false)}
               >
                 <sphereGeometry
                   args={[6, 64, 64, 0, Math.PI * 2, 0, Math.PI]}
@@ -114,6 +123,8 @@ export const App = () => {
                 position={[0.62, 0.1875, 0.15]}
                 scale={0.08}
                 rotation={[Math.PI / 2, 0, -Math.PI - Math.PI / 16]}
+                onPointerOver={() => hover(true)}
+                onPointerOut={() => hover(false)}
               >
                 <Phone />
               </mesh>
@@ -131,6 +142,8 @@ export const App = () => {
                   e.stopPropagation();
                   setUrl("https://gardencenter-c902f.web.app");
                 }}
+                onPointerOver={() => hover(true)}
+                onPointerOut={() => hover(false)}
               >
                 <Van />
               </mesh>
@@ -142,6 +155,8 @@ export const App = () => {
                   e.stopPropagation();
                   setUrl("https://elibuildslite.web.app");
                 }}
+                onPointerOver={() => hover(true)}
+                onPointerOut={() => hover(false)}
               >
                 <Gramps />
               </mesh>

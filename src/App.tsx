@@ -227,9 +227,9 @@ export const App = () => {
                 <Mug />
               </mesh>
               <mesh
-                position={[0.775, 0.18195, 0.075]}
+                position={[0.325, 0.18265, 0.425]}
                 scale={0.08}
-                rotation={[Math.PI / 2, 0, -Math.PI / 1.15]}
+                rotation={[Math.PI / 2, 0, -Math.PI / 1.5]}
                 onClick={(e) => {
                   e.stopPropagation();
                   setUrl("https://partlist-e9fc0.web.app/admin");
@@ -249,9 +249,9 @@ export const App = () => {
                 <Headphones />
               </mesh>
               <mesh
-                position={[0.375, 0.18265, 0.5]}
+                position={[0.775, 0.18195, 0.175]}
                 scale={0.08}
-                rotation={[Math.PI / 2, 0, Math.PI / 2 + Math.PI / 10]}
+                rotation={[Math.PI / 2, 0, Math.PI / 2 + Math.PI / 6]}
                 onClick={(e) => {
                   e.stopPropagation();
                   const email = "ciaranstudio@icloud.com";

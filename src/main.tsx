@@ -31,6 +31,8 @@ function Root() {
       >
         <a
           href="https://github.com/chairawn/"
+          target="_blank"
+          rel="noopener noreferrer"
           style={{
             position: "absolute",
             top: 30,
@@ -44,6 +46,8 @@ function Root() {
         </a>
         <a
           href="https://github.com/chairawn/"
+          target="_blank"
+          rel="noopener noreferrer"
           style={{
             position: "absolute",
             top: 30,
@@ -71,7 +75,7 @@ function Root() {
           {params ? "< back" : "drag to spin, tap frames to view"}      
         </a> */}
       </div>
-      <div
+      {/* <div
         style={{
           position: "absolute",
           top: 30,
@@ -83,7 +87,7 @@ function Root() {
       >
         tap object to show project <br />
         tap laptop screen to interact
-      </div>
+      </div> */}
 
       <div
         id="footer"

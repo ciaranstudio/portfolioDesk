@@ -98,8 +98,8 @@ export const App = () => {
               />
               <mesh
                 visible={true}
-                position={[-0.56, 0.235, 0]}
-                scale={0.01}
+                position={[-0.295, 0.265, 0.51]}
+                scale={0.0125}
                 castShadow
                 onClick={(e) => {
                   e.stopPropagation();
@@ -114,15 +114,25 @@ export const App = () => {
                 <MeshDistortMaterial
                   distort={0.4}
                   speed={2}
-                  color="#aaaaaa"
+                  color="#757575"
                   depthTest={true}
                   flatShading={true}
                 />
               </mesh>
               <mesh
-                position={[0.62, 0.1875, 0.15]}
+                position={[0.375, 0.1875, 0.5]}
                 scale={0.08}
-                rotation={[Math.PI / 2, 0, -Math.PI - Math.PI / 16]}
+                rotation={[Math.PI / 2, 0, Math.PI / 2 + Math.PI / 10]}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const email = "ciaranstudio@icloud.com";
+                  const subject = "Contact from portfolio";
+                  // const emailBody = "";
+                  document.location = "mailto:" + email + "?subject=" + subject;
+                  // +
+                  // "&body=" +
+                  // emailBody;
+                }}
                 onPointerOver={() => hover(true)}
                 onPointerOut={() => hover(false)}
               >
@@ -149,8 +159,8 @@ export const App = () => {
               </mesh>
               <mesh
                 scale={0.4}
-                position={[0.525, 0.175, 0.45]}
-                rotation={[0, Math.PI / 6, 0]}
+                position={[0.57, 0.175, 0.4]}
+                rotation={[0, Math.PI / 8, 0]}
                 onClick={(e) => {
                   e.stopPropagation();
                   setUrl("https://elibuildslite.web.app");

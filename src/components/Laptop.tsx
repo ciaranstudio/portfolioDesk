@@ -1,5 +1,6 @@
 import { useGLTF, Html } from "@react-three/drei";
-import { Suspense } from "react";
+import { Suspense, useLayoutEffect } from "react";
+import { Mesh } from "three";
 
 export interface LaptopProps {
   dpr: number;
@@ -7,10 +8,18 @@ export interface LaptopProps {
 }
 
 export default function Laptop(props: LaptopProps) {
-  const model = useGLTF("/laptop.gltf");
+  const { scene } = useGLTF("/laptop.gltf");
+
+  useLayoutEffect(() => {
+    scene.traverse((o) => {
+      if ((o as Mesh).isMesh) {
+        o.castShadow = true;
+      }
+    });
+  }, []);
 
   return (
-    <primitive object={model.scene}>
+    <primitive object={scene}>
       <Html
         center={props.dpr > 2 ? true : false}
         occlude={props.dpr > 2 ? false : true}

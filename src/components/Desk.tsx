@@ -36,5 +36,3 @@ export default function Desk(props: JSX.IntrinsicElements["group"]) {
     </group>
   );
 }
-
-useGLTF.preload("/desk.gltf");

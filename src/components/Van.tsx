@@ -131,5 +131,3 @@ export default function Van(props: JSX.IntrinsicElements["group"]) {
     </group>
   );
 }
-
-useGLTF.preload("/van.gltf");

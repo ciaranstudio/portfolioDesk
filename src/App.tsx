@@ -288,7 +288,7 @@ export const App = () => {
               </mesh>
               <mesh
                 scale={0.1}
-                position={[-0.5875, 0.175, 0.35]}
+                position={[-0.6, 0.175, 0.35]}
                 rotation={[0, Math.PI / 6, 0]}
                 onClick={(e) => {
                   e.stopPropagation();

@@ -1,7 +1,7 @@
 // import { isMobile, isSafari } from "react-device-detect";
 import { useState, useRef, useEffect, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Stage, OrbitControls } from "@react-three/drei";
+import { Stage, OrbitControls, MeshDistortMaterial } from "@react-three/drei";
 import Phone from "./Phone";
 import Desk from "./Desk";
 import Laptop from "./Laptop";
@@ -13,7 +13,7 @@ import { Gramps } from "./Gramps";
 
 export const App = () => {
   // const laptop = useRef<THREE.Group>(null);
-  // const [url, setUrl] = useState("");
+  const [url, setUrl] = useState("https://gardencenter-c902f.web.app");
   // const ref = useRef(null);
   const [height, setHeight] = useState("100dvh");
   const [dpr, setDpr] = useState(0);
@@ -90,14 +90,35 @@ export const App = () => {
                 intensity={3}
               />
               <mesh
-                position={[0.65, 0.1875, 0.15]}
+                visible={true}
+                position={[-0.56, 0.235, 0]}
+                scale={0.01}
+                castShadow
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setUrl("https://partlist-e9fc0.web.app");
+                }}
+              >
+                <sphereGeometry
+                  args={[6, 64, 64, 0, Math.PI * 2, 0, Math.PI]}
+                />
+                <MeshDistortMaterial
+                  distort={0.4}
+                  speed={2}
+                  color="#aaaaaa"
+                  depthTest={true}
+                  flatShading={true}
+                />
+              </mesh>
+              <mesh
+                position={[0.62, 0.1875, 0.15]}
                 scale={0.08}
                 rotation={[Math.PI / 2, 0, -Math.PI - Math.PI / 16]}
               >
                 <Phone />
               </mesh>
               <mesh scale={0.3} position={[0, 0.04, 0]}>
-                <Laptop dpr={dpr} />
+                <Laptop dpr={dpr} url={url} />
               </mesh>
               <mesh rotation={[0, -Math.PI / 2, 0]}>
                 <Desk />
@@ -106,6 +127,10 @@ export const App = () => {
                 scale={0.1}
                 position={[-0.5875, 0.175, 0.35]}
                 rotation={[0, Math.PI / 6, 0]}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setUrl("https://gardencenter-c902f.web.app");
+                }}
               >
                 <Van />
               </mesh>
@@ -113,6 +138,10 @@ export const App = () => {
                 scale={0.4}
                 position={[0.525, 0.175, 0.45]}
                 rotation={[0, Math.PI / 6, 0]}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setUrl("https://elibuildslite.web.app");
+                }}
               >
                 <Gramps />
               </mesh>

@@ -3,6 +3,7 @@ import { Suspense } from "react";
 
 export interface LaptopProps {
   dpr: number;
+  url: string;
 }
 
 export default function Laptop(props: LaptopProps) {
@@ -20,11 +21,7 @@ export default function Laptop(props: LaptopProps) {
         rotation-x={props.dpr > 2 ? 0 : -0.256}
       >
         <Suspense fallback={<div className="text-lg">loading...</div>}>
-          <iframe
-            src="https://gardencenter-c902f.web.app"
-            title="laptop screen"
-            seamless
-          />
+          <iframe src={props.url} title="laptop screen" seamless />
         </Suspense>
       </Html>
     </primitive>

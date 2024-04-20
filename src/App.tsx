@@ -221,13 +221,21 @@ export const App = () => {
                 position={[0.7, 0.1335, -0.1]}
                 scale={0.15}
                 rotation={[0, 0, 0]}
+                onPointerOver={() => hover(true)}
+                onPointerOut={() => hover(false)}
               >
                 <Mug />
               </mesh>
               <mesh
-                position={[0.775, 0.18195, 0.025]}
+                position={[0.775, 0.18195, 0.075]}
                 scale={0.08}
                 rotation={[Math.PI / 2, 0, -Math.PI / 1.15]}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setUrl("https://partlist-e9fc0.web.app/admin");
+                }}
+                onPointerOver={() => hover(true)}
+                onPointerOut={() => hover(false)}
               >
                 <Pen />
               </mesh>
@@ -235,6 +243,8 @@ export const App = () => {
                 position={[-0.675, 0.431, 0]}
                 scale={0.2}
                 rotation={[Math.PI / 2.235, Math.PI / 34, Math.PI / 1.25]}
+                onPointerOver={() => hover(true)}
+                onPointerOut={() => hover(false)}
               >
                 <Headphones />
               </mesh>
@@ -264,7 +274,7 @@ export const App = () => {
                 castShadow
                 onClick={(e) => {
                   e.stopPropagation();
-                  setUrl("https://partlist-e9fc0.web.app");
+                  setUrl("https://partlist-e9fc0.web.app/debug");
                 }}
                 onPointerOver={() => hover(true)}
                 onPointerOut={() => hover(false)}

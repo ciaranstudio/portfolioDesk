@@ -1,6 +1,3 @@
-// import * as React from "react";
-// import { useState } from "react";
-// import * as THREE from "three";
 import { useGLTF, Html } from "@react-three/drei";
 import { Suspense } from "react";
 
@@ -9,9 +6,6 @@ export interface LaptopProps {
 }
 
 export default function Laptop(props: LaptopProps) {
-  //   const [urlInput, setUrlInput] = useState(url);
-
-  // from market.pmnd.rs
   const model = useGLTF("/laptop.gltf");
 
   return (

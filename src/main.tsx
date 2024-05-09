@@ -43,6 +43,16 @@ function Root() {
             left: 63,
             fontSize: "11px",
           }}
+          onClick={(e) => {
+            e.stopPropagation();
+            const email = "ciaranstudio@icloud.com";
+            const subject = "Contact from portfolio";
+            // const emailBody = "";
+            document.location = "mailto:" + email + "?subject=" + subject;
+            // +
+            // "&body=" +
+            // emailBody;
+          }}
         >
           ciaran okeeffe
           <br />

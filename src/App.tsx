@@ -1,7 +1,7 @@
 import { isMobile } from "react-device-detect";
 // import { isMobile, isSafari } from "react-device-detect";
 import { useState, useRef, useEffect, Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, ThreeEvent } from "@react-three/fiber";
 import {
   Stage,
   OrbitControls,
@@ -19,7 +19,9 @@ import Placeholder from "./components/Placeholder";
 import Pen from "./components/Pen";
 import Mug from "./components/Mug";
 import Headphones from "./components/Headphones";
+
 import * as THREE from "three";
+import RingCircle from "./components/RingCircle";
 
 // const regular = import("@pmndrs/assets/fonts/inter_regular.woff");
 // const medium = import("@pmndrs/assets/fonts/inter_medium.woff");
@@ -35,7 +37,7 @@ export const App = () => {
 
   const objectPositions = {
     headphones: new THREE.Vector3(-0.675, 0.431, 0),
-    van: new THREE.Vector3(-0.6, 0.175, 0.35),
+    van: new THREE.Vector3(-0.6, 0.176, 0.35),
     sphere: new THREE.Vector3(-0.295, 0.265, 0.51),
     laptop: new THREE.Vector3(0, 0.0475, 0),
     pen: new THREE.Vector3(0.325, 0.18265, 0.425),
@@ -49,6 +51,7 @@ export const App = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const [appLoaded, setAppLoaded] = useState(false);
+  const [selected, setSelected] = useState("");
   const [url, setUrl] = useState("");
   const [height, setHeight] = useState("100dvh");
   const [dpr, setDpr] = useState(0);
@@ -61,10 +64,45 @@ export const App = () => {
   const { loaded, progress } = useProgress();
   useCursor(hovered);
 
-  const handleObjectClick = (e: { stopPropagation: () => void }) => {
+  const handleObjectClick = (
+    e: ThreeEvent<MouseEvent>,
+    selected: React.SetStateAction<string> | string,
+    url: React.SetStateAction<string> | string,
+  ) => {
     e.stopPropagation();
     console.log("e: ", e);
-    // setUrl("https://partlist-e9fc0.web.app/admin");
+    setUrl(url);
+    setSelected(selected);
+    // const { eventObject } = e;
+    // const tempObjectPosition = eventObject.position;
+    // console.log("tempObjectPosition: ", tempObjectPosition);
+    // const positionMatch = (element: { x: number; y: number; z: number }) =>
+    //   element.x === tempObjectPosition.x &&
+    //   element.y === tempObjectPosition.y &&
+    //   element.z === tempObjectPosition.z;
+    // // for (const property in objectPositions) {
+    // if (positionMatch(objectPositions.van)) {
+    //   setSelected("van");
+    // }
+    // if (positionMatch(objectPositions.sphere)) {
+    //   setSelected("sphere");
+    // }
+    // if (positionMatch(objectPositions.pen)) {
+    //   setSelected("pen");
+    // }
+    // if (positionMatch(objectPositions.stool)) {
+    //   setSelected("stool");
+    // }
+    // }
+
+    // if (positionMatch) {
+    //   // console.log(
+    //   //   "shopItems.find(positionMatch): ",
+    //   //   shopItems.find(positionMatch),
+    //   // );
+    //   const matchedItem = objectPositions.find(positionMatch);
+    //   // console.log("matchedItem from handleClick function: ", matchedItem);
+    // }
   };
 
   const handleUrlToastClick = (e: { stopPropagation: () => void }) => {
@@ -98,6 +136,10 @@ export const App = () => {
         });
     };
   }, []);
+
+  useEffect(() => {
+    console.log("selected: ", selected);
+  }, [selected]);
 
   // Partial fix for Html component position issue on Chrome and Safari browsers (CSS 3D transform position bug)
   useEffect(() => {
@@ -331,6 +373,26 @@ export const App = () => {
                 position={[1, 10, 5]}
                 intensity={3}
               />
+              <RingCircle
+                position={objectPositions.van}
+                selected={selected === "van"}
+              />
+              <RingCircle
+                position={[
+                  objectPositions.sphere.x,
+                  objectPositions.sphere.y - 0.088,
+                  objectPositions.sphere.z,
+                ]}
+                selected={selected === "sphere"}
+              />
+              <RingCircle
+                position={objectPositions.pen}
+                selected={selected === "pen"}
+              />
+              <RingCircle
+                position={objectPositions.stool}
+                selected={selected === "stool"}
+              />
               {/* Mug */}
               <mesh
                 position={objectPositions.mug}
@@ -341,21 +403,25 @@ export const App = () => {
               >
                 <Mug />
               </mesh>
+
               {/* Pen */}
               <mesh
                 position={objectPositions.pen}
                 scale={0.08}
                 rotation={[Math.PI / 2, 0, -Math.PI / 1.5]}
                 onClick={(e) => {
-                  e.stopPropagation();
-                  setUrl("https://partlist-e9fc0.web.app/admin");
-                  handleObjectClick(e);
+                  handleObjectClick(
+                    e,
+                    "pen",
+                    "https://partlist-e9fc0.web.app/admin",
+                  );
                 }}
                 onPointerOver={() => hover(true)}
                 onPointerOut={() => hover(false)}
               >
                 <Pen />
               </mesh>
+
               {/* Headphones */}
               <mesh
                 position={objectPositions.headphones}
@@ -393,8 +459,11 @@ export const App = () => {
                 scale={0.0125}
                 castShadow
                 onClick={(e) => {
-                  e.stopPropagation();
-                  setUrl("https://partlist-e9fc0.web.app/debug");
+                  handleObjectClick(
+                    e,
+                    "sphere",
+                    "https://partlist-e9fc0.web.app/debug",
+                  );
                 }}
                 onPointerOver={() => hover(true)}
                 onPointerOut={() => hover(false)}
@@ -410,6 +479,7 @@ export const App = () => {
                   flatShading={true}
                 />
               </mesh>
+
               {/* Laptop */}
               <mesh scale={0.3} position={objectPositions.laptop}>
                 <Laptop dpr={dpr} url={url} />
@@ -420,8 +490,11 @@ export const App = () => {
                 position={objectPositions.van}
                 rotation={[0, Math.PI / 6, 0]}
                 onClick={(e) => {
-                  e.stopPropagation();
-                  setUrl("https://gardencenter-c902f.web.app");
+                  handleObjectClick(
+                    e,
+                    "van",
+                    "https://gardencenter-c902f.web.app",
+                  );
                 }}
                 onPointerOver={() => hover(true)}
                 onPointerOut={() => hover(false)}
@@ -434,8 +507,11 @@ export const App = () => {
                 position={objectPositions.stool}
                 rotation={[0, Math.PI / 8, 0]}
                 onClick={(e) => {
-                  e.stopPropagation();
-                  setUrl("https://elibuildslite.web.app");
+                  handleObjectClick(
+                    e,
+                    "stool",
+                    "https://elibuildslite.web.app",
+                  );
                 }}
                 onPointerOver={() => hover(true)}
                 onPointerOut={() => hover(false)}

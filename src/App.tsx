@@ -25,38 +25,39 @@ import RingCircle from "./components/RingCircle";
 // const regular = import("@pmndrs/assets/fonts/inter_regular.woff");
 // const medium = import("@pmndrs/assets/fonts/inter_medium.woff");
 
+const PROJECT_MAP: Record<string, any> = {
+  van: "GardenCenter",
+  sphere: "PartList (debug)",
+  pen: "PartList (admin)",
+  stool: "EliBuilds",
+};
+
+const TOAST_DURATION = 10000;
+const TOAST_FONT_SIZE = "0.8rem";
+const TOAST_BACKGROUND = "white";
+const TOAST_COLOR = "#212121";
+
+const OBJECT_POSITIONS = {
+  headphones: new THREE.Vector3(-0.675, 0.431, 0),
+  van: new THREE.Vector3(-0.6, 0.176, 0.415),
+  sphere: new THREE.Vector3(-0.175, 0.275, 0.45),
+  laptop: new THREE.Vector3(0, 0.0475, 0),
+  pen: new THREE.Vector3(0.175, 0.18265, 0.475),
+  stool: new THREE.Vector3(0.585, 0.176, 0.425),
+  // phone: new THREE.Vector3(0.775, 0.18195, 0.175),
+  mug: new THREE.Vector3(0.715, 0.1335, -0.1275),
+  desk: new THREE.Vector3(0, 0, 0),
+};
+
 export const App = () => {
-  const projectMap: Record<string, any> = {
-    van: "GardenCenter",
-    sphere: "PartList (debug)",
-    pen: "PartList (admin)",
-    stool: "EliBuilds",
-  };
-
-  const toastDuration = 10000;
-  const toastFontSize = "0.8rem";
-  const toastBackground = "white";
-  const toastColor = "#212121";
-
-  const objectPositions = {
-    headphones: new THREE.Vector3(-0.675, 0.431, 0),
-    van: new THREE.Vector3(-0.6, 0.176, 0.415),
-    sphere: new THREE.Vector3(-0.175, 0.275, 0.45),
-    laptop: new THREE.Vector3(0, 0.0475, 0),
-    pen: new THREE.Vector3(0.175, 0.18265, 0.475),
-    stool: new THREE.Vector3(0.585, 0.176, 0.425),
-    // phone: new THREE.Vector3(0.775, 0.18195, 0.175),
-    mug: new THREE.Vector3(0.715, 0.1335, -0.1275),
-    desk: new THREE.Vector3(0, 0, 0),
-  };
-
+  // toasts
   const loadingToast = toast;
   const urlToast = toast;
 
-  // const ref = useRef(null);
+  // useRef
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const [appLoaded, setAppLoaded] = useState(false);
+  // useState
   const [hovered, hover] = useState(false);
   const [selected, setSelected] = useState("");
   const [url, setUrl] = useState("");
@@ -69,60 +70,13 @@ export const App = () => {
   const [_zoomLevelClient, setZoomLevelClient] = useState("");
   const [_roundedDpr, setRoundedDpr] = useState(0);
 
+  const [appLoaded, setAppLoaded] = useState(false);
   const { loaded, progress } = useProgress();
   useCursor(hovered);
 
-  const handleObjectClick = (
-    e: ThreeEvent<MouseEvent>,
-    selected: React.SetStateAction<string> | string,
-    url: React.SetStateAction<string> | string,
-  ) => {
-    e.stopPropagation();
-    console.log("e: ", e);
-    setUrl(url);
-    setSelected(selected);
-    // const { eventObject } = e;
-    // const tempObjectPosition = eventObject.position;
-    // console.log("tempObjectPosition: ", tempObjectPosition);
-    // const positionMatch = (element: { x: number; y: number; z: number }) =>
-    //   element.x === tempObjectPosition.x &&
-    //   element.y === tempObjectPosition.y &&
-    //   element.z === tempObjectPosition.z;
-    // // for (const property in objectPositions) {
-    // if (positionMatch(objectPositions.van)) {
-    //   setSelected("van");
-    // }
-    // if (positionMatch(objectPositions.sphere)) {
-    //   setSelected("sphere");
-    // }
-    // if (positionMatch(objectPositions.pen)) {
-    //   setSelected("pen");
-    // }
-    // if (positionMatch(objectPositions.stool)) {
-    //   setSelected("stool");
-    // }
-    // }
-
-    // if (positionMatch) {
-    //   // console.log(
-    //   //   "shopItems.find(positionMatch): ",
-    //   //   shopItems.find(positionMatch),
-    //   // );
-    //   const matchedItem = objectPositions.find(positionMatch);
-    //   // console.log("matchedItem from handleClick function: ", matchedItem);
-    // }
-  };
-
-  const handleUrlToastClick = (e: { stopPropagation: () => void }) => {
-    e.stopPropagation();
-    toast.dismiss("instructionsToast1");
-    if (url === "https://elibuildslite.web.app") {
-      window.open("https://elibuilds-998b8.web.app", "_blank", "noreferrer");
-    } else window.open(url, "_blank", "noreferrer");
-  };
-
+  // useEffect
+  // Prevent swipe back navigation gesture on iOS mobile devices
   useEffect(() => {
-    // prevent swipe back navigation gesture on iOS mobile devices
     const element = document.querySelector("canvas");
     if (element)
       element.addEventListener("touchstart", (e) => {
@@ -144,10 +98,6 @@ export const App = () => {
         });
     };
   }, []);
-
-  useEffect(() => {
-    console.log("selected: ", selected);
-  }, [selected]);
 
   // Partial fix for Html component position issue on Chrome and Safari browsers (CSS 3D transform position bug)
   useEffect(() => {
@@ -198,7 +148,7 @@ export const App = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  // original suggested fix for Html position issue on Safari mobile for reference (modified above)
+  // Original suggested fix for Html position issue on Safari mobile for reference (modified above)
   // https://github.com/pmndrs/drei/issues/720
   // useEffect(() => {
   //   const measureCanvasHeight = () => {
@@ -225,14 +175,32 @@ export const App = () => {
   // }, []);
 
   // Loading in progress toast
+
+  // If view is zoomed in / resized during experience, update height to 100 svh
+  useEffect(() => {
+    // console.log("zoomLevelWebkit: ", zoomLevelWebkit);
+    // console.log("roundedZoomWebkit: ", roundedZoomWebkit);
+    // console.log("zoomLevelClient: ", zoomLevelClient);
+    // console.log("roundedDpr: ", roundedDpr);
+    if (roundedZoomWebkit >= 99) {
+      // console.log("webkit zoom (rounded) < 99 so refresh");
+      if (canvasRef.current) {
+        // console.log(canvasRef.current);
+        // console.log(canvasRef.current.style);
+        canvasRef.current.style.height = "100svh";
+      }
+    }
+  }, [roundedZoomWebkit]);
+
+  // Loading toast
   useEffect(() => {
     loadingToast.loading("Loading...", {
       id: "loadingToast",
       position: "bottom-right",
       style: {
-        fontSize: toastFontSize,
-        background: toastBackground,
-        color: toastColor,
+        fontSize: TOAST_FONT_SIZE,
+        background: TOAST_BACKGROUND,
+        color: TOAST_COLOR,
         fontFamily: "var(--leva-fonts-mono)",
         borderTop: "0.1rem solid #e0e0e0,",
       },
@@ -250,21 +218,21 @@ export const App = () => {
         id: "loadingToast",
         position: "bottom-right",
         style: {
-          fontSize: toastFontSize,
-          background: toastBackground,
-          color: toastColor,
+          fontSize: TOAST_FONT_SIZE,
+          background: TOAST_BACKGROUND,
+          color: TOAST_COLOR,
           fontFamily: "var(--leva-fonts-mono)",
           borderTop: "0.1rem solid #e0e0e0,",
         },
       });
       toast("Tap items to show projects", {
         id: "instructionsToast1",
-        duration: toastDuration,
+        duration: TOAST_DURATION,
         position: isMobile ? "bottom-center" : "bottom-center",
         style: {
-          fontSize: toastFontSize,
-          background: toastBackground,
-          color: toastColor,
+          fontSize: TOAST_FONT_SIZE,
+          background: TOAST_BACKGROUND,
+          color: TOAST_COLOR,
           fontFamily: "var(--leva-fonts-mono)",
           borderTop: "0.1rem solid #e0e0e0,",
         },
@@ -272,6 +240,7 @@ export const App = () => {
     }
   }, [progress]);
 
+  // Click to open project url toast on url change
   useEffect(() => {
     if (appLoaded)
       urlToast(
@@ -281,16 +250,16 @@ export const App = () => {
               style={{
                 padding: "2",
                 margin: "0",
-                fontSize: toastFontSize,
-                background: toastBackground,
-                color: toastColor,
+                fontSize: TOAST_FONT_SIZE,
+                background: TOAST_BACKGROUND,
+                color: TOAST_COLOR,
                 fontFamily: "var(--leva-fonts-mono)",
                 border: "none",
                 cursor: "pointer",
               }}
             >
               Click <u style={{ color: "#757575" }}>here</u> to open{" "}
-              {projectMap[selected]}
+              {PROJECT_MAP[selected]}
             </button>
           </span>
         ),
@@ -299,21 +268,20 @@ export const App = () => {
           duration: Infinity,
           position: isMobile ? "bottom-center" : "bottom-center",
           style: {
-            fontSize: toastFontSize,
+            fontSize: TOAST_FONT_SIZE,
             background: "#ffffff",
-            color: toastColor,
+            color: TOAST_COLOR,
           },
           className: "url-toast",
-          // Custom Icon
           icon: (
             <button
               style={{
                 padding: "2",
                 paddingRight: "0",
                 margin: "0",
-                fontSize: toastFontSize,
+                fontSize: TOAST_FONT_SIZE,
                 background: "#ffffff",
-                color: toastColor,
+                color: TOAST_COLOR,
                 fontFamily: "var(--leva-fonts-mono)",
                 border: "none",
                 cursor: "pointer",
@@ -323,7 +291,6 @@ export const App = () => {
               ➡️
             </button>
           ),
-          // Change colors of success/error/loading icon
           iconTheme: {
             primary: "#000",
             secondary: "#fff",
@@ -337,20 +304,55 @@ export const App = () => {
       );
   }, [url]);
 
-  useEffect(() => {
-    // console.log("zoomLevelWebkit: ", zoomLevelWebkit);
-    // console.log("roundedZoomWebkit: ", roundedZoomWebkit);
-    // console.log("zoomLevelClient: ", zoomLevelClient);
-    // console.log("roundedDpr: ", roundedDpr);
-    if (roundedZoomWebkit >= 99) {
-      // console.log("webkit zoom (rounded) < 99 so refresh");
-      if (canvasRef.current) {
-        // console.log(canvasRef.current);
-        // console.log(canvasRef.current.style);
-        canvasRef.current.style.height = "100svh";
-      }
-    }
-  }, [roundedZoomWebkit]);
+  // click handlers / functions
+  const handleObjectClick = (
+    e: ThreeEvent<MouseEvent>,
+    selected: React.SetStateAction<string> | string,
+    url: React.SetStateAction<string> | string,
+  ) => {
+    e.stopPropagation();
+    console.log("e: ", e);
+    setUrl(url);
+    setSelected(selected);
+    // const { eventObject } = e;
+    // const tempObjectPosition = eventObject.position;
+    // console.log("tempObjectPosition: ", tempObjectPosition);
+    // const positionMatch = (element: { x: number; y: number; z: number }) =>
+    //   element.x === tempObjectPosition.x &&
+    //   element.y === tempObjectPosition.y &&
+    //   element.z === tempObjectPosition.z;
+    // // for (const property in OBJECT_POSITIONS) {
+    // if (positionMatch(OBJECT_POSITIONS.van)) {
+    //   setSelected("van");
+    // }
+    // if (positionMatch(OBJECT_POSITIONS.sphere)) {
+    //   setSelected("sphere");
+    // }
+    // if (positionMatch(OBJECT_POSITIONS.pen)) {
+    //   setSelected("pen");
+    // }
+    // if (positionMatch(OBJECT_POSITIONS.stool)) {
+    //   setSelected("stool");
+    // }
+    // }
+
+    // if (positionMatch) {
+    //   // console.log(
+    //   //   "shopItems.find(positionMatch): ",
+    //   //   shopItems.find(positionMatch),
+    //   // );
+    //   const matchedItem = OBJECT_POSITIONS.find(positionMatch);
+    //   // console.log("matchedItem from handleClick function: ", matchedItem);
+    // }
+  };
+
+  const handleUrlToastClick = (e: { stopPropagation: () => void }) => {
+    e.stopPropagation();
+    toast.dismiss("instructionsToast1");
+    if (url === "https://elibuildslite.web.app") {
+      window.open("https://elibuilds-998b8.web.app", "_blank", "noreferrer");
+    } else window.open(url, "_blank", "noreferrer");
+  };
 
   return (
     <>
@@ -385,7 +387,7 @@ export const App = () => {
 
               {/* Mug */}
               <mesh
-                position={objectPositions.mug}
+                position={OBJECT_POSITIONS.mug}
                 scale={0.15}
                 rotation={[0, 0, 0]}
                 // onPointerOver={() => hover(true)}
@@ -407,21 +409,21 @@ export const App = () => {
                 }}
               >
                 <mesh
-                  position={objectPositions.pen}
+                  position={OBJECT_POSITIONS.pen}
                   scale={0.115}
                   rotation={[Math.PI / 2, 0, -Math.PI / 1.5]}
                 >
                   <Pen />
                 </mesh>
                 <RingCircle
-                  position={objectPositions.pen}
+                  position={OBJECT_POSITIONS.pen}
                   selected={selected === "pen"}
                 />
               </group>
 
               {/* Headphones */}
               <mesh
-                position={objectPositions.headphones}
+                position={OBJECT_POSITIONS.headphones}
                 scale={0.2}
                 rotation={[Math.PI / 2.235, Math.PI / 34, Math.PI / 1.25]}
                 // onPointerOver={() => hover(true)}
@@ -432,7 +434,7 @@ export const App = () => {
 
               {/* iPhone */}
               {/* <mesh
-                position={objectPositions.phone}
+                position={OBJECT_POSITIONS.phone}
                 scale={0.08}
                 rotation={[Math.PI / 2, 0, Math.PI / 2 + Math.PI / 6]}
                 onClick={(e) => {
@@ -465,7 +467,7 @@ export const App = () => {
               >
                 <mesh
                   visible={true}
-                  position={objectPositions.sphere}
+                  position={OBJECT_POSITIONS.sphere}
                   scale={0.0185}
                   castShadow
                 >
@@ -482,16 +484,16 @@ export const App = () => {
                 </mesh>
                 <RingCircle
                   position={[
-                    objectPositions.sphere.x,
-                    objectPositions.sphere.y - 0.09925,
-                    objectPositions.sphere.z,
+                    OBJECT_POSITIONS.sphere.x,
+                    OBJECT_POSITIONS.sphere.y - 0.09925,
+                    OBJECT_POSITIONS.sphere.z,
                   ]}
                   selected={selected === "sphere"}
                 />
               </group>
 
               {/* Laptop */}
-              <mesh scale={0.3} position={objectPositions.laptop}>
+              <mesh scale={0.3} position={OBJECT_POSITIONS.laptop}>
                 <Laptop dpr={dpr} url={url} />
               </mesh>
 
@@ -509,13 +511,13 @@ export const App = () => {
               >
                 <mesh
                   scale={0.115}
-                  position={objectPositions.van}
+                  position={OBJECT_POSITIONS.van}
                   rotation={[0, Math.PI / 6, 0]}
                 >
                   <Van />
                 </mesh>
                 <RingCircle
-                  position={objectPositions.van}
+                  position={OBJECT_POSITIONS.van}
                   selected={selected === "van"}
                 />
               </group>
@@ -534,20 +536,20 @@ export const App = () => {
               >
                 <mesh
                   scale={0.44}
-                  position={objectPositions.stool}
+                  position={OBJECT_POSITIONS.stool}
                   rotation={[0, Math.PI / 8, 0]}
                 >
                   <Gramps />
                 </mesh>
                 <RingCircle
-                  position={objectPositions.stool}
+                  position={OBJECT_POSITIONS.stool}
                   selected={selected === "stool"}
                 />
               </group>
 
               {/* Desk */}
               <mesh
-                position={objectPositions.desk}
+                position={OBJECT_POSITIONS.desk}
                 rotation={[0, -Math.PI / 2, 0]}
               >
                 <Desk />

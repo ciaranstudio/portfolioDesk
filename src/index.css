@@ -97,3 +97,7 @@ svg {
   border-top: 0.1rem solid #e0e0e0;
   cursor: pointer;
 }
+
+.url_toast_link {
+  color: "#ffffff";
+}

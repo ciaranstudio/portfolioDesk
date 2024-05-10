@@ -39,7 +39,7 @@ function Root() {
           // rel="noopener noreferrer"
           style={{
             position: "absolute",
-            bottom: 30,
+            top: 30,
             left: 63,
             fontSize: "11px",
             cursor: "pointer",
@@ -65,7 +65,7 @@ function Root() {
           rel="noopener noreferrer"
           style={{
             position: "absolute",
-            bottom: 30,
+            top: 30,
             right: 25,
             fontSize: "11px",
             cursor: "pointer",
@@ -76,7 +76,7 @@ function Root() {
         <WavesIcon
           style={{
             position: "absolute",
-            bottom: 32.5,
+            top: 31,
             left: 25,
             width: 30,
             cursor: "pointer",

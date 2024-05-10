@@ -1,3 +1,4 @@
+import { isMobile } from "react-device-detect";
 // import { isMobile, isSafari } from "react-device-detect";
 import { useState, useRef, useEffect, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
@@ -209,7 +210,7 @@ export const App = () => {
       toast("Tap items to show projects", {
         id: "instructionsToast1",
         duration: toastDuration,
-        position: "bottom-center",
+        position: isMobile ? "top-center" : "bottom-center",
         style: {
           fontSize: toastFontSize,
           background: toastBackground,
@@ -232,24 +233,24 @@ export const App = () => {
                 margin: "0",
                 fontSize: toastFontSize,
                 background: "#ffffff",
-                color: toastColor,
+                // color: toastColor,
                 fontFamily: "var(--leva-fonts-mono)",
                 border: "none",
                 cursor: "pointer",
               }}
             >
-              Click <u>here</u> to open project
+              Click <u style={{ color: "#757575" }}>here</u> to open project
             </button>
           </span>
         ),
         {
           id: "urlToast",
           duration: Infinity,
-          position: "bottom-center",
+          position: isMobile ? "top-center" : "bottom-center",
           style: {
             fontSize: toastFontSize,
             background: "#ffffff",
-            color: toastColor,
+            // color: toastColor,
           },
           className: "url-toast",
           // Custom Icon

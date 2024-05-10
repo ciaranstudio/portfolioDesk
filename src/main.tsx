@@ -57,7 +57,7 @@ function Root() {
         >
           ciaran okeeffe
           <br />
-          developer
+          <i style={{ color: "grey" }}>developer</i>
         </a>
         <a
           href="https://github.com/chairawn/"
@@ -80,6 +80,7 @@ function Root() {
             left: 25,
             width: 30,
             cursor: "pointer",
+            color: "#aaaaaa",
           }}
           onClick={(e) => {
             e.stopPropagation();

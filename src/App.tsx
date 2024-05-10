@@ -10,7 +10,7 @@ import {
   useProgress,
 } from "@react-three/drei";
 import toast, { Toaster } from "react-hot-toast";
-import Phone from "./components/Phone";
+// import Phone from "./components/Phone";
 import Desk from "./components/Desk";
 import Laptop from "./components/Laptop";
 import Van from "./components/Van";
@@ -37,13 +37,13 @@ export const App = () => {
 
   const objectPositions = {
     headphones: new THREE.Vector3(-0.675, 0.431, 0),
-    van: new THREE.Vector3(-0.6, 0.176, 0.35),
-    sphere: new THREE.Vector3(-0.295, 0.265, 0.51),
+    van: new THREE.Vector3(-0.6, 0.176, 0.415),
+    sphere: new THREE.Vector3(-0.175, 0.275, 0.45),
     laptop: new THREE.Vector3(0, 0.0475, 0),
-    pen: new THREE.Vector3(0.325, 0.18265, 0.425),
-    stool: new THREE.Vector3(0.57, 0.176, 0.4),
-    phone: new THREE.Vector3(0.775, 0.18195, 0.175),
-    mug: new THREE.Vector3(0.7, 0.1335, -0.1),
+    pen: new THREE.Vector3(0.175, 0.18265, 0.475),
+    stool: new THREE.Vector3(0.585, 0.176, 0.425),
+    // phone: new THREE.Vector3(0.775, 0.18195, 0.175),
+    mug: new THREE.Vector3(0.715, 0.1335, -0.1275),
     desk: new THREE.Vector3(0, 0, 0),
   };
 
@@ -235,7 +235,7 @@ export const App = () => {
   useEffect(() => {
     console.log("loaded: ", loaded);
     console.log("progress: ", progress);
-    if (loaded === 32 && progress === 100) {
+    if (loaded === 28 && progress === 100) {
       window.document.body.style.cursor = "auto";
       setAppLoaded(true);
       loadingToast.success("Welcome!", {
@@ -373,26 +373,7 @@ export const App = () => {
                 position={[1, 10, 5]}
                 intensity={3}
               />
-              <RingCircle
-                position={objectPositions.van}
-                selected={selected === "van"}
-              />
-              <RingCircle
-                position={[
-                  objectPositions.sphere.x,
-                  objectPositions.sphere.y - 0.088,
-                  objectPositions.sphere.z,
-                ]}
-                selected={selected === "sphere"}
-              />
-              <RingCircle
-                position={objectPositions.pen}
-                selected={selected === "pen"}
-              />
-              <RingCircle
-                position={objectPositions.stool}
-                selected={selected === "stool"}
-              />
+
               {/* Mug */}
               <mesh
                 position={objectPositions.mug}
@@ -405,10 +386,7 @@ export const App = () => {
               </mesh>
 
               {/* Pen */}
-              <mesh
-                position={objectPositions.pen}
-                scale={0.08}
-                rotation={[Math.PI / 2, 0, -Math.PI / 1.5]}
+              <group
                 onClick={(e) => {
                   handleObjectClick(
                     e,
@@ -416,11 +394,21 @@ export const App = () => {
                     "https://partlist-e9fc0.web.app/admin",
                   );
                 }}
-                onPointerOver={() => hover(true)}
-                onPointerOut={() => hover(false)}
               >
-                <Pen />
-              </mesh>
+                <mesh
+                  position={objectPositions.pen}
+                  scale={0.115}
+                  rotation={[Math.PI / 2, 0, -Math.PI / 1.5]}
+                  onPointerOver={() => hover(true)}
+                  onPointerOut={() => hover(false)}
+                >
+                  <Pen />
+                </mesh>
+                <RingCircle
+                  position={objectPositions.pen}
+                  selected={selected === "pen"}
+                />
+              </group>
 
               {/* Headphones */}
               <mesh
@@ -432,8 +420,9 @@ export const App = () => {
               >
                 <Headphones />
               </mesh>
+
               {/* iPhone */}
-              <mesh
+              {/* <mesh
                 position={objectPositions.phone}
                 scale={0.08}
                 rotation={[Math.PI / 2, 0, Math.PI / 2 + Math.PI / 6]}
@@ -451,13 +440,10 @@ export const App = () => {
                 onPointerOut={() => hover(false)}
               >
                 <Phone />
-              </mesh>
+              </mesh> */}
+
               {/* Distorted sphere */}
-              <mesh
-                visible={true}
-                position={objectPositions.sphere}
-                scale={0.0125}
-                castShadow
+              <group
                 onClick={(e) => {
                   handleObjectClick(
                     e,
@@ -465,30 +451,43 @@ export const App = () => {
                     "https://partlist-e9fc0.web.app/debug",
                   );
                 }}
-                onPointerOver={() => hover(true)}
-                onPointerOut={() => hover(false)}
               >
-                <sphereGeometry
-                  args={[6, 64, 64, 0, Math.PI * 2, 0, Math.PI]}
+                <mesh
+                  visible={true}
+                  position={objectPositions.sphere}
+                  scale={0.0185}
+                  castShadow
+                  onPointerOver={() => hover(true)}
+                  onPointerOut={() => hover(false)}
+                >
+                  <sphereGeometry
+                    args={[6, 64, 64, 0, Math.PI * 2, 0, Math.PI]}
+                  />
+                  <MeshDistortMaterial
+                    distort={0.4}
+                    speed={2}
+                    color="#757575"
+                    depthTest={true}
+                    flatShading={true}
+                  />
+                </mesh>
+                <RingCircle
+                  position={[
+                    objectPositions.sphere.x,
+                    objectPositions.sphere.y - 0.09925,
+                    objectPositions.sphere.z,
+                  ]}
+                  selected={selected === "sphere"}
                 />
-                <MeshDistortMaterial
-                  distort={0.4}
-                  speed={2}
-                  color="#757575"
-                  depthTest={true}
-                  flatShading={true}
-                />
-              </mesh>
+              </group>
 
               {/* Laptop */}
               <mesh scale={0.3} position={objectPositions.laptop}>
                 <Laptop dpr={dpr} url={url} />
               </mesh>
+
               {/* Van */}
-              <mesh
-                scale={0.1}
-                position={objectPositions.van}
-                rotation={[0, Math.PI / 6, 0]}
+              <group
                 onClick={(e) => {
                   handleObjectClick(
                     e,
@@ -496,16 +495,24 @@ export const App = () => {
                     "https://gardencenter-c902f.web.app",
                   );
                 }}
-                onPointerOver={() => hover(true)}
-                onPointerOut={() => hover(false)}
               >
-                <Van />
-              </mesh>
+                <mesh
+                  scale={0.115}
+                  position={objectPositions.van}
+                  rotation={[0, Math.PI / 6, 0]}
+                  onPointerOver={() => hover(true)}
+                  onPointerOut={() => hover(false)}
+                >
+                  <Van />
+                </mesh>
+                <RingCircle
+                  position={objectPositions.van}
+                  selected={selected === "van"}
+                />
+              </group>
+
               {/* Stool (Gramps model) */}
-              <mesh
-                scale={0.4}
-                position={objectPositions.stool}
-                rotation={[0, Math.PI / 8, 0]}
+              <group
                 onClick={(e) => {
                   handleObjectClick(
                     e,
@@ -513,11 +520,22 @@ export const App = () => {
                     "https://elibuildslite.web.app",
                   );
                 }}
-                onPointerOver={() => hover(true)}
-                onPointerOut={() => hover(false)}
               >
-                <Gramps />
-              </mesh>
+                <mesh
+                  scale={0.44}
+                  position={objectPositions.stool}
+                  rotation={[0, Math.PI / 8, 0]}
+                  onPointerOver={() => hover(true)}
+                  onPointerOut={() => hover(false)}
+                >
+                  <Gramps />
+                </mesh>
+                <RingCircle
+                  position={objectPositions.stool}
+                  selected={selected === "stool"}
+                />
+              </group>
+
               {/* Desk */}
               <mesh
                 position={objectPositions.desk}

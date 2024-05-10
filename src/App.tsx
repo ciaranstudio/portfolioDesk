@@ -14,12 +14,11 @@ import toast, { Toaster } from "react-hot-toast";
 import Desk from "./components/Desk";
 import Laptop from "./components/Laptop";
 import Van from "./components/Van";
-import { Gramps } from "./components/Gramps";
+import Gramps from "./components/Gramps";
 import Placeholder from "./components/Placeholder";
 import Pen from "./components/Pen";
 import Mug from "./components/Mug";
 import Headphones from "./components/Headphones";
-
 import * as THREE from "three";
 import RingCircle from "./components/RingCircle";
 
@@ -27,12 +26,16 @@ import RingCircle from "./components/RingCircle";
 // const medium = import("@pmndrs/assets/fonts/inter_medium.woff");
 
 export const App = () => {
-  const loadingToast = toast;
-  const urlToast = toast;
+  const projectMap: Record<string, any> = {
+    van: "GardenCenter",
+    sphere: "PartList (debug)",
+    pen: "PartList (admin)",
+    stool: "EliBuilds",
+  };
 
   const toastDuration = 10000;
   const toastFontSize = "0.8rem";
-  const toastBackground = "lightGrey";
+  const toastBackground = "white";
   const toastColor = "#212121";
 
   const objectPositions = {
@@ -47,19 +50,24 @@ export const App = () => {
     desk: new THREE.Vector3(0, 0, 0),
   };
 
+  const loadingToast = toast;
+  const urlToast = toast;
+
   // const ref = useRef(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const [appLoaded, setAppLoaded] = useState(false);
+  const [hovered, hover] = useState(false);
   const [selected, setSelected] = useState("");
   const [url, setUrl] = useState("");
+
   const [height, setHeight] = useState("100dvh");
   const [dpr, setDpr] = useState(0);
-  const [zoomLevelWebkit, setZoomLevelWebkit] = useState(0);
+
+  const [_zoomLevelWebkit, setZoomLevelWebkit] = useState(0);
   const [roundedZoomWebkit, setRoundedZoomWebkit] = useState(0);
-  const [zoomLevelClient, setZoomLevelClient] = useState("");
-  const [roundedDpr, setRoundedDpr] = useState(0);
-  const [hovered, hover] = useState(false);
+  const [_zoomLevelClient, setZoomLevelClient] = useState("");
+  const [_roundedDpr, setRoundedDpr] = useState(0);
 
   const { loaded, progress } = useProgress();
   useCursor(hovered);
@@ -274,14 +282,15 @@ export const App = () => {
                 padding: "2",
                 margin: "0",
                 fontSize: toastFontSize,
-                background: "#ffffff",
+                background: toastBackground,
                 color: toastColor,
                 fontFamily: "var(--leva-fonts-mono)",
                 border: "none",
                 cursor: "pointer",
               }}
             >
-              Click <u style={{ color: "#757575" }}>here</u> to open project
+              Click <u style={{ color: "#757575" }}>here</u> to open{" "}
+              {projectMap[selected]}
             </button>
           </span>
         ),
@@ -329,19 +338,19 @@ export const App = () => {
   }, [url]);
 
   useEffect(() => {
-    console.log("zoomLevelWebkit: ", zoomLevelWebkit);
-    console.log("roundedZoomWebkit: ", roundedZoomWebkit);
-    console.log("zoomLevelClient: ", zoomLevelClient);
-    console.log("roundedDpr: ", roundedDpr);
+    // console.log("zoomLevelWebkit: ", zoomLevelWebkit);
+    // console.log("roundedZoomWebkit: ", roundedZoomWebkit);
+    // console.log("zoomLevelClient: ", zoomLevelClient);
+    // console.log("roundedDpr: ", roundedDpr);
     if (roundedZoomWebkit >= 99) {
-      console.log("webkit zoom (rounded) < 99 so refresh");
+      // console.log("webkit zoom (rounded) < 99 so refresh");
       if (canvasRef.current) {
-        console.log(canvasRef.current);
-        console.log(canvasRef.current.style);
+        // console.log(canvasRef.current);
+        // console.log(canvasRef.current.style);
         canvasRef.current.style.height = "100svh";
       }
     }
-  }, [zoomLevelWebkit, roundedZoomWebkit, zoomLevelClient, roundedDpr]);
+  }, [roundedZoomWebkit]);
 
   return (
     <>
@@ -387,6 +396,8 @@ export const App = () => {
 
               {/* Pen */}
               <group
+                onPointerOver={() => hover(true)}
+                onPointerOut={() => hover(false)}
                 onClick={(e) => {
                   handleObjectClick(
                     e,
@@ -399,8 +410,6 @@ export const App = () => {
                   position={objectPositions.pen}
                   scale={0.115}
                   rotation={[Math.PI / 2, 0, -Math.PI / 1.5]}
-                  onPointerOver={() => hover(true)}
-                  onPointerOut={() => hover(false)}
                 >
                   <Pen />
                 </mesh>
@@ -444,6 +453,8 @@ export const App = () => {
 
               {/* Distorted sphere */}
               <group
+                onPointerOver={() => hover(true)}
+                onPointerOut={() => hover(false)}
                 onClick={(e) => {
                   handleObjectClick(
                     e,
@@ -457,8 +468,6 @@ export const App = () => {
                   position={objectPositions.sphere}
                   scale={0.0185}
                   castShadow
-                  onPointerOver={() => hover(true)}
-                  onPointerOut={() => hover(false)}
                 >
                   <sphereGeometry
                     args={[6, 64, 64, 0, Math.PI * 2, 0, Math.PI]}
@@ -488,6 +497,8 @@ export const App = () => {
 
               {/* Van */}
               <group
+                onPointerOver={() => hover(true)}
+                onPointerOut={() => hover(false)}
                 onClick={(e) => {
                   handleObjectClick(
                     e,
@@ -500,8 +511,6 @@ export const App = () => {
                   scale={0.115}
                   position={objectPositions.van}
                   rotation={[0, Math.PI / 6, 0]}
-                  onPointerOver={() => hover(true)}
-                  onPointerOut={() => hover(false)}
                 >
                   <Van />
                 </mesh>
@@ -513,6 +522,8 @@ export const App = () => {
 
               {/* Stool (Gramps model) */}
               <group
+                onPointerOver={() => hover(true)}
+                onPointerOut={() => hover(false)}
                 onClick={(e) => {
                   handleObjectClick(
                     e,
@@ -525,8 +536,6 @@ export const App = () => {
                   scale={0.44}
                   position={objectPositions.stool}
                   rotation={[0, Math.PI / 8, 0]}
-                  onPointerOver={() => hover(true)}
-                  onPointerOut={() => hover(false)}
                 >
                   <Gramps />
                 </mesh>

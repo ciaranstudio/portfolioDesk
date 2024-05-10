@@ -2,7 +2,7 @@ import { useLayoutEffect } from "react";
 import { useGLTF, useTexture } from "@react-three/drei";
 import { Mesh } from "three";
 
-export const Gramps = () => {
+export default function Gramps() {
   const { scene, nodes, materials } = useGLTF("./gramps.gltf");
 
   const blackTexture = [
@@ -35,4 +35,4 @@ export const Gramps = () => {
   }, []);
 
   return <primitive object={scene} />;
-};
+}

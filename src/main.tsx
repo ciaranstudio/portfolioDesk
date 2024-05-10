@@ -80,7 +80,7 @@ function Root() {
             left: 25,
             width: 30,
             cursor: "pointer",
-            color: "#aaaaaa",
+            color: "#808080",
           }}
           onClick={(e) => {
             e.stopPropagation();

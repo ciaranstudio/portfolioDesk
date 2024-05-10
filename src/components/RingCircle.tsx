@@ -1,4 +1,4 @@
-import { Edges } from "@react-three/drei";
+import { Edges, MeshWobbleMaterial } from "@react-three/drei";
 import * as THREE from "three";
 import { Vector3 } from "@react-three/fiber";
 
@@ -17,16 +17,18 @@ export default function RingCircle(props: {
       rotation-x={-Math.PI / 2}
       rotation-y={0}
       scale={props.selected ? 0.8 : 0.7}
+      receiveShadow
+      castShadow
     >
       <circleGeometry args={[0.2, 64]} />
-      <meshBasicMaterial
+      <MeshWobbleMaterial
+        factor={0.00015}
+        speed={props.selected ? 10 : 4}
         transparent
         opacity={props.selected ? 0.65 : 0.15}
-        side={THREE.DoubleSide}
-        color={props.selected ? "darkgrey" : "lightgrey"}
+        color={props.selected ? "white" : "lightgrey"}
       />
       <Edges
-        // scale={props.selected ? 1 : 0.7}
         threshold={90}
         color={props.selected ? "darkgrey" : "grey"}
         visible={true}

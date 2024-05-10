@@ -86,11 +86,7 @@ function Root() {
             e.stopPropagation();
             const email = "ciaranstudio@icloud.com";
             const subject = "Contact from portfolio";
-            // const emailBody = "";
             document.location = "mailto:" + email + "?subject=" + subject;
-            // +
-            // "&body=" +
-            // emailBody;
           }}
         />
       </div>

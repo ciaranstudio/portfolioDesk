@@ -3,7 +3,8 @@ import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 
 export default function Mug() {
-  const { scene, nodes, materials } = useGLTF("/mug.gltf");
+  const { scene, nodes, materials } = useGLTF("/models/mug.gltf");
+
   const lightGrey = new THREE.Color(0xd3d3d3);
 
   useLayoutEffect(() => {

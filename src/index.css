@@ -20,7 +20,6 @@ body,
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  /* cursor: grab; */
 }
 
 #root:active {
@@ -70,13 +69,10 @@ svg {
 
 #initialLoad {
   display: flex;
-  /* flex-direction: column; */
   justify-content: center;
   align-items: center;
-  /* padding: 10% 10%; */
   width: 100%;
   height: 100%;
-  /* margin: auto; */
   color: #3992ff;
   cursor: wait;
 }

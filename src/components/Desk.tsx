@@ -16,7 +16,11 @@ type GLTFResult = GLTF & {
 
 export default function Desk(props: JSX.IntrinsicElements["group"]) {
   const group = useRef<THREE.Group>(null);
-  const { nodes, materials } = useGLTF("/desk.gltf") as unknown as GLTFResult;
+
+  const { nodes, materials } = useGLTF(
+    "/models/desk.gltf",
+  ) as unknown as GLTFResult;
+
   return (
     <group ref={group} {...props} dispose={null}>
       <group position={[0, 0, 0]} scale={1.43}>

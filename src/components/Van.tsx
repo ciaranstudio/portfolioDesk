@@ -27,7 +27,11 @@ type GLTFResult = GLTF & {
 
 export default function Van(props: JSX.IntrinsicElements["group"]) {
   const group = useRef<THREE.Group>(null);
-  const { nodes, materials } = useGLTF("/van.gltf") as unknown as GLTFResult;
+
+  const { nodes, materials } = useGLTF(
+    "/models/van.gltf",
+  ) as unknown as GLTFResult;
+
   return (
     <group ref={group} {...props} dispose={null}>
       <group rotation={[Math.PI, 0, Math.PI]} scale={1.2}>

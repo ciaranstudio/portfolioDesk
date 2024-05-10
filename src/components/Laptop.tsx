@@ -8,7 +8,7 @@ export interface LaptopProps {
 }
 
 export default function Laptop(props: LaptopProps) {
-  const { scene } = useGLTF("/laptop.gltf");
+  const { scene } = useGLTF("/models/laptop.gltf");
 
   useLayoutEffect(() => {
     scene.traverse((o) => {

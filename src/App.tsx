@@ -1,5 +1,4 @@
 import { isMobile } from "react-device-detect";
-// import { isMobile, isSafari } from "react-device-detect";
 import { useState, useRef, useEffect, Suspense } from "react";
 import { Canvas, ThreeEvent } from "@react-three/fiber";
 import {
@@ -10,7 +9,6 @@ import {
   useProgress,
 } from "@react-three/drei";
 import toast, { Toaster } from "react-hot-toast";
-// import Phone from "./components/Phone";
 import Desk from "./components/Desk";
 import Laptop from "./components/Laptop";
 import Van from "./components/Van";
@@ -21,9 +19,6 @@ import Mug from "./components/Mug";
 import Headphones from "./components/Headphones";
 import * as THREE from "three";
 import RingCircle from "./components/RingCircle";
-
-// const regular = import("@pmndrs/assets/fonts/inter_regular.woff");
-// const medium = import("@pmndrs/assets/fonts/inter_medium.woff");
 
 const PROJECT_MAP: Record<string, any> = {
   van: "GardenCenter",
@@ -45,7 +40,7 @@ const OBJECT_POSITIONS = {
   pen: new THREE.Vector3(0.175, 0.18265, 0.475),
   stool: new THREE.Vector3(0.585, 0.176, 0.425),
   // phone: new THREE.Vector3(0.775, 0.18195, 0.175),
-  mug: new THREE.Vector3(0.715, 0.1335, -0.1275),
+  mug: new THREE.Vector3(0.715, 0.1335, -0.1),
   desk: new THREE.Vector3(0, 0, 0),
 };
 
@@ -126,18 +121,10 @@ export const App = () => {
       const zoomClient =
         document.body.clientWidth + "px x " + document.body.clientHeight + "px";
       const roundedDpr = Math.round(window.devicePixelRatio);
-      // const zoomIE = (window.document.body.style.zoom =
-      //   screen.logicalXDPI / screen.deviceXDPI);
-      // https://stackoverflow.com/questions/1713771/how-to-detect-page-zoom-level-in-all-modern-browsers/5078596#5078596
-
-      // https://stackoverflow.com/questions/21093570/force-page-zoom-at-100-with-js
       setZoomLevelWebkit(zoomWebkit);
       setRoundedZoomWebkit(roundedZoomWebkit);
       setZoomLevelClient(zoomClient);
       setRoundedDpr(roundedDpr);
-      console.log("zoomLevelWebkit: ", zoomWebkit);
-      console.log("zoomLevelClient: ", zoomClient);
-      console.log("zoomLevelDpr: ", roundedDpr);
       setHeight("100dvh)");
       measureCanvasHeight();
     };
@@ -148,35 +135,8 @@ export const App = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  // Original suggested fix for Html position issue on Safari mobile for reference (modified above)
-  // https://github.com/pmndrs/drei/issues/720
-  // useEffect(() => {
-  //   const measureCanvasHeight = () => {
-  //     const canvasElement = canvasRef.current;
-  //     const canvasHeight = canvasElement.clientHeight;
 
-  //     if (isSafari && canvasHeight % 2 !== 0) {
-  //       setHeight(`${canvasHeight - 1}px`);
-  //     }
-  //   };
-
-  //   window.requestAnimationFrame(measureCanvasHeight);
-  //   const handleResize = () => {
-  //     setHeight("100dvh)");
-  //     measureCanvasHeight();
-  //   };
-
-  //   if (!isMobile && isSafari) {
-  //     window.addEventListener("resize", handleResize);
-  //     return () => {
-  //       window.removeEventListener("resize", handleResize);
-  //     };
-  //   }
-  // }, []);
-
-  // Loading in progress toast
-
-  // If view is zoomed in / resized during experience, update height to 100 svh
+  // If view is zoomed in / resized during experience then update height to 100 svh
   useEffect(() => {
     // console.log("zoomLevelWebkit: ", zoomLevelWebkit);
     // console.log("roundedZoomWebkit: ", roundedZoomWebkit);
@@ -192,7 +152,7 @@ export const App = () => {
     }
   }, [roundedZoomWebkit]);
 
-  // Loading toast
+  // Loading in progress toast
   useEffect(() => {
     loadingToast.loading("Loading...", {
       id: "loadingToast",
@@ -207,7 +167,7 @@ export const App = () => {
     });
   }, []);
 
-  // Welcome toast / instructions for how to use site on initial load
+  // Welcome toast, instructions for how to use site on initial load
   useEffect(() => {
     console.log("loaded: ", loaded);
     console.log("progress: ", progress);
@@ -240,7 +200,7 @@ export const App = () => {
     }
   }, [progress]);
 
-  // Click to open project url toast on url change
+  // Click to open project url toast
   useEffect(() => {
     if (appLoaded)
       urlToast(
@@ -314,36 +274,6 @@ export const App = () => {
     console.log("e: ", e);
     setUrl(url);
     setSelected(selected);
-    // const { eventObject } = e;
-    // const tempObjectPosition = eventObject.position;
-    // console.log("tempObjectPosition: ", tempObjectPosition);
-    // const positionMatch = (element: { x: number; y: number; z: number }) =>
-    //   element.x === tempObjectPosition.x &&
-    //   element.y === tempObjectPosition.y &&
-    //   element.z === tempObjectPosition.z;
-    // // for (const property in OBJECT_POSITIONS) {
-    // if (positionMatch(OBJECT_POSITIONS.van)) {
-    //   setSelected("van");
-    // }
-    // if (positionMatch(OBJECT_POSITIONS.sphere)) {
-    //   setSelected("sphere");
-    // }
-    // if (positionMatch(OBJECT_POSITIONS.pen)) {
-    //   setSelected("pen");
-    // }
-    // if (positionMatch(OBJECT_POSITIONS.stool)) {
-    //   setSelected("stool");
-    // }
-    // }
-
-    // if (positionMatch) {
-    //   // console.log(
-    //   //   "shopItems.find(positionMatch): ",
-    //   //   shopItems.find(positionMatch),
-    //   // );
-    //   const matchedItem = OBJECT_POSITIONS.find(positionMatch);
-    //   // console.log("matchedItem from handleClick function: ", matchedItem);
-    // }
   };
 
   const handleUrlToastClick = (e: { stopPropagation: () => void }) => {
@@ -389,9 +319,7 @@ export const App = () => {
               <mesh
                 position={OBJECT_POSITIONS.mug}
                 scale={0.15}
-                rotation={[0, 0, 0]}
-                // onPointerOver={() => hover(true)}
-                // onPointerOut={() => hover(false)}
+                rotation={[0, Math.PI / 5.75, 0]}
               >
                 <Mug />
               </mesh>
@@ -426,32 +354,9 @@ export const App = () => {
                 position={OBJECT_POSITIONS.headphones}
                 scale={0.2}
                 rotation={[Math.PI / 2.235, Math.PI / 34, Math.PI / 1.25]}
-                // onPointerOver={() => hover(true)}
-                // onPointerOut={() => hover(false)}
               >
                 <Headphones />
               </mesh>
-
-              {/* iPhone */}
-              {/* <mesh
-                position={OBJECT_POSITIONS.phone}
-                scale={0.08}
-                rotation={[Math.PI / 2, 0, Math.PI / 2 + Math.PI / 6]}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  const email = "ciaranstudio@icloud.com";
-                  const subject = "Contact from portfolio";
-                  // const emailBody = "";
-                  document.location = "mailto:" + email + "?subject=" + subject;
-                  // +
-                  // "&body=" +
-                  // emailBody;
-                }}
-                onPointerOver={() => hover(true)}
-                onPointerOut={() => hover(false)}
-              >
-                <Phone />
-              </mesh> */}
 
               {/* Distorted sphere */}
               <group

@@ -3,7 +3,7 @@ import { useGLTF, useTexture } from "@react-three/drei";
 import { Mesh } from "three";
 
 export default function Gramps() {
-  const { scene, nodes, materials } = useGLTF("./gramps.gltf");
+  const { scene, nodes, materials } = useGLTF("./models/gramps.gltf");
 
   const blackTexture = [
     "./textures/VeneerWhiteOakRandomMatched001/VeneerWhiteOakRandomMatched001_COL_2K_METALNESS_black.png",
@@ -26,7 +26,6 @@ export default function Gramps() {
 
   useLayoutEffect(() => {
     scene.traverse((o) => {
-      // console.log("o: ", o);
       if ((o as Mesh).isMesh) {
         o.castShadow = true;
         o.receiveShadow = true;

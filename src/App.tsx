@@ -210,7 +210,7 @@ export const App = () => {
       toast("Tap items to show projects", {
         id: "instructionsToast1",
         duration: toastDuration,
-        position: isMobile ? "top-center" : "bottom-center",
+        position: isMobile ? "bottom-center" : "bottom-center",
         style: {
           fontSize: toastFontSize,
           background: toastBackground,
@@ -233,7 +233,7 @@ export const App = () => {
                 margin: "0",
                 fontSize: toastFontSize,
                 background: "#ffffff",
-                // color: toastColor,
+                color: toastColor,
                 fontFamily: "var(--leva-fonts-mono)",
                 border: "none",
                 cursor: "pointer",
@@ -246,11 +246,11 @@ export const App = () => {
         {
           id: "urlToast",
           duration: Infinity,
-          position: isMobile ? "top-center" : "bottom-center",
+          position: isMobile ? "bottom-center" : "bottom-center",
           style: {
             fontSize: toastFontSize,
             background: "#ffffff",
-            // color: toastColor,
+            color: toastColor,
           },
           className: "url-toast",
           // Custom Icon
@@ -336,8 +336,8 @@ export const App = () => {
                 position={objectPositions.mug}
                 scale={0.15}
                 rotation={[0, 0, 0]}
-                onPointerOver={() => hover(true)}
-                onPointerOut={() => hover(false)}
+                // onPointerOver={() => hover(true)}
+                // onPointerOut={() => hover(false)}
               >
                 <Mug />
               </mesh>
@@ -361,8 +361,8 @@ export const App = () => {
                 position={objectPositions.headphones}
                 scale={0.2}
                 rotation={[Math.PI / 2.235, Math.PI / 34, Math.PI / 1.25]}
-                onPointerOver={() => hover(true)}
-                onPointerOut={() => hover(false)}
+                // onPointerOver={() => hover(true)}
+                // onPointerOut={() => hover(false)}
               >
                 <Headphones />
               </mesh>

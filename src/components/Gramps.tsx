@@ -26,7 +26,7 @@ export const Gramps = () => {
 
   useLayoutEffect(() => {
     scene.traverse((o) => {
-      console.log("o: ", o);
+      // console.log("o: ", o);
       if ((o as Mesh).isMesh) {
         o.castShadow = true;
         o.receiveShadow = true;

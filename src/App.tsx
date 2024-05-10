@@ -69,7 +69,6 @@ export const App = () => {
   const handleUrlToastClick = (e: { stopPropagation: () => void }) => {
     e.stopPropagation();
     toast.dismiss("instructionsToast1");
-    toast.dismiss("instructionsToast2");
     if (url === "https://elibuildslite.web.app") {
       window.open("https://elibuilds-998b8.web.app", "_blank", "noreferrer");
     } else window.open(url, "_blank", "noreferrer");
@@ -178,7 +177,7 @@ export const App = () => {
   useEffect(() => {
     loadingToast.loading("Loading...", {
       id: "loadingToast",
-      position: "top-center",
+      position: "bottom-right",
       style: {
         fontSize: toastFontSize,
         background: toastBackground,
@@ -198,19 +197,7 @@ export const App = () => {
       setAppLoaded(true);
       loadingToast.success("Welcome!", {
         id: "loadingToast",
-        position: "top-center",
-        style: {
-          fontSize: toastFontSize,
-          background: toastBackground,
-          color: toastColor,
-          fontFamily: "var(--leva-fonts-mono)",
-          borderTop: "0.1rem solid #e0e0e0,",
-        },
-      });
-      toast("Tap laptop screen to interact", {
-        id: "instructionsToast1",
-        duration: toastDuration,
-        position: "bottom-center",
+        position: "bottom-right",
         style: {
           fontSize: toastFontSize,
           background: toastBackground,
@@ -220,7 +207,7 @@ export const App = () => {
         },
       });
       toast("Tap items to show projects", {
-        id: "instructionsToast2",
+        id: "instructionsToast1",
         duration: toastDuration,
         position: "bottom-center",
         style: {
@@ -238,26 +225,27 @@ export const App = () => {
     if (appLoaded)
       urlToast(
         (_t) => (
-          <button
-            style={{
-              padding: "0",
-              margin: "0",
-              fontSize: toastFontSize,
-              background: "#ffffff",
-              color: toastColor,
-              fontFamily: "var(--leva-fonts-mono)",
-              border: "none",
-              cursor: "pointer",
-            }}
-            onClick={handleUrlToastClick}
-          >
-            Click here to open project
-          </button>
+          <span onClick={handleUrlToastClick}>
+            <button
+              style={{
+                padding: "2",
+                margin: "0",
+                fontSize: toastFontSize,
+                background: "#ffffff",
+                color: toastColor,
+                fontFamily: "var(--leva-fonts-mono)",
+                border: "none",
+                cursor: "pointer",
+              }}
+            >
+              Click <u>here</u> to open project
+            </button>
+          </span>
         ),
         {
           id: "urlToast",
           duration: Infinity,
-          position: "top-center",
+          position: "bottom-center",
           style: {
             fontSize: toastFontSize,
             background: "#ffffff",
@@ -268,10 +256,11 @@ export const App = () => {
           icon: (
             <button
               style={{
-                padding: "0",
+                padding: "2",
+                paddingRight: "0",
                 margin: "0",
                 fontSize: toastFontSize,
-                background: toastBackground,
+                background: "#ffffff",
                 color: toastColor,
                 fontFamily: "var(--leva-fonts-mono)",
                 border: "none",

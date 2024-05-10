@@ -34,14 +34,15 @@ function Root() {
         }}
       >
         <a
-          href="https://github.com/chairawn/"
-          target="_blank"
-          rel="noopener noreferrer"
+          // href="https://github.com/chairawn/"
+          // target="_blank"
+          // rel="noopener noreferrer"
           style={{
             position: "absolute",
-            top: 30,
+            bottom: 30,
             left: 63,
             fontSize: "11px",
+            cursor: "pointer",
           }}
           onClick={(e) => {
             e.stopPropagation();
@@ -64,15 +65,32 @@ function Root() {
           rel="noopener noreferrer"
           style={{
             position: "absolute",
-            top: 30,
+            bottom: 30,
             right: 25,
             fontSize: "11px",
+            cursor: "pointer",
           }}
         >
           gitHub
         </a>
         <WavesIcon
-          style={{ position: "absolute", top: 30, left: 25, width: 30 }}
+          style={{
+            position: "absolute",
+            bottom: 32.5,
+            left: 25,
+            width: 30,
+            cursor: "pointer",
+          }}
+          onClick={(e) => {
+            e.stopPropagation();
+            const email = "ciaranstudio@icloud.com";
+            const subject = "Contact from portfolio";
+            // const emailBody = "";
+            document.location = "mailto:" + email + "?subject=" + subject;
+            // +
+            // "&body=" +
+            // emailBody;
+          }}
         />
       </div>
       <div

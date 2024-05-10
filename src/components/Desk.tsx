@@ -23,7 +23,7 @@ export default function Desk(props: JSX.IntrinsicElements["group"]) {
         <mesh
           geometry={nodes.Cube007.geometry}
           material={materials.MetalBlack}
-          material-color="grey"
+          material-color="white"
           receiveShadow
         />
         <mesh

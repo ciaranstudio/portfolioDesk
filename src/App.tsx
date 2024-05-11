@@ -17,32 +17,8 @@ import Placeholder from "./components/Placeholder";
 import Pen from "./components/Pen";
 import Mug from "./components/Mug";
 import Headphones from "./components/Headphones";
-import * as THREE from "three";
 import RingCircle from "./components/RingCircle";
-
-const PROJECT_MAP: Record<string, any> = {
-  van: "GardenCenter",
-  sphere: "PartList (debug)",
-  pen: "PartList (admin)",
-  stool: "EliBuilds",
-};
-
-const TOAST_DURATION = 10000;
-const TOAST_FONT_SIZE = "0.8rem";
-const TOAST_BACKGROUND = "white";
-const TOAST_COLOR = "#212121";
-
-const OBJECT_POSITIONS = {
-  headphones: new THREE.Vector3(-0.675, 0.431, 0),
-  van: new THREE.Vector3(-0.6, 0.176, 0.415),
-  sphere: new THREE.Vector3(-0.175, 0.275, 0.45),
-  laptop: new THREE.Vector3(0, 0.0475, 0),
-  pen: new THREE.Vector3(0.175, 0.18265, 0.475),
-  stool: new THREE.Vector3(0.585, 0.176, 0.425),
-  // phone: new THREE.Vector3(0.775, 0.18195, 0.175),
-  mug: new THREE.Vector3(0.715, 0.1335, -0.1),
-  desk: new THREE.Vector3(0, 0, 0),
-};
+import { TOAST, OBJECT_POSITIONS, PROJECT_MAP } from "./constants";
 
 export const App = () => {
   // toasts
@@ -158,9 +134,9 @@ export const App = () => {
       id: "loadingToast",
       position: "bottom-center",
       style: {
-        fontSize: TOAST_FONT_SIZE,
-        background: TOAST_BACKGROUND,
-        color: TOAST_COLOR,
+        fontSize: TOAST.TOAST_FONT_SIZE,
+        background: TOAST.TOAST_BACKGROUND,
+        color: TOAST.TOAST_COLOR,
         fontFamily: "var(--leva-fonts-mono)",
         borderTop: "0.1rem solid #e0e0e0,",
       },
@@ -178,21 +154,21 @@ export const App = () => {
         id: "loadingToast",
         position: "bottom-center",
         style: {
-          fontSize: TOAST_FONT_SIZE,
-          background: TOAST_BACKGROUND,
-          color: TOAST_COLOR,
+          fontSize: TOAST.TOAST_FONT_SIZE,
+          background: TOAST.TOAST_BACKGROUND,
+          color: TOAST.TOAST_COLOR,
           fontFamily: "var(--leva-fonts-mono)",
           borderTop: "0.1rem solid #e0e0e0,",
         },
       });
       toast("Tap items to show projects", {
         id: "instructionsToast1",
-        duration: TOAST_DURATION,
+        duration: TOAST.TOAST_DURATION,
         position: isMobile ? "bottom-center" : "bottom-center",
         style: {
-          fontSize: TOAST_FONT_SIZE,
-          background: TOAST_BACKGROUND,
-          color: TOAST_COLOR,
+          fontSize: TOAST.TOAST_FONT_SIZE,
+          background: TOAST.TOAST_BACKGROUND,
+          color: TOAST.TOAST_COLOR,
           fontFamily: "var(--leva-fonts-mono)",
           borderTop: "0.1rem solid #e0e0e0,",
         },
@@ -210,9 +186,9 @@ export const App = () => {
               style={{
                 padding: "2",
                 margin: "0",
-                fontSize: TOAST_FONT_SIZE,
-                background: TOAST_BACKGROUND,
-                color: TOAST_COLOR,
+                fontSize: TOAST.TOAST_FONT_SIZE,
+                background: TOAST.TOAST_BACKGROUND,
+                color: TOAST.TOAST_COLOR,
                 fontFamily: "var(--leva-fonts-mono)",
                 border: "none",
                 cursor: "pointer",
@@ -228,9 +204,9 @@ export const App = () => {
           duration: Infinity,
           position: isMobile ? "bottom-center" : "bottom-center",
           style: {
-            fontSize: TOAST_FONT_SIZE,
+            fontSize: TOAST.TOAST_FONT_SIZE,
             background: "#ffffff",
-            color: TOAST_COLOR,
+            color: TOAST.TOAST_COLOR,
           },
           className: "url-toast",
           icon: (
@@ -239,9 +215,9 @@ export const App = () => {
                 padding: "2",
                 paddingRight: "0",
                 margin: "0",
-                fontSize: TOAST_FONT_SIZE,
-                background: "#ffffff",
-                color: TOAST_COLOR,
+                fontSize: TOAST.TOAST_FONT_SIZE,
+                background: TOAST.TOAST_BACKGROUND,
+                color: TOAST.TOAST_COLOR,
                 fontFamily: "var(--leva-fonts-mono)",
                 border: "none",
                 cursor: "pointer",

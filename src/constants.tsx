@@ -8,10 +8,10 @@ export const PROJECT_MAP: Record<string, any> = {
 };
 
 export const TOAST = {
-  TOAST_DURATION: 10000,
-  TOAST_FONT_SIZE: "0.8rem",
-  TOAST_BACKGROUND: "white",
-  TOAST_COLOR: "#212121",
+  duration: 10000,
+  fontSize: "0.8rem",
+  background: "white",
+  color: "#212121",
 };
 
 export const OBJECT_POSITIONS = {

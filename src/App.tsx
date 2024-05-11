@@ -156,7 +156,7 @@ export const App = () => {
   useEffect(() => {
     loadingToast.loading("Loading...", {
       id: "loadingToast",
-      position: "bottom-right",
+      position: "bottom-center",
       style: {
         fontSize: TOAST_FONT_SIZE,
         background: TOAST_BACKGROUND,

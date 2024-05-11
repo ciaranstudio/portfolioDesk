@@ -176,7 +176,7 @@ export const App = () => {
       setAppLoaded(true);
       loadingToast.success("Welcome!", {
         id: "loadingToast",
-        position: "bottom-right",
+        position: "bottom-center",
         style: {
           fontSize: TOAST_FONT_SIZE,
           background: TOAST_BACKGROUND,
@@ -219,7 +219,7 @@ export const App = () => {
               }}
             >
               Click <u style={{ color: "#757575" }}>here</u> to open{" "}
-              {PROJECT_MAP[selected]}
+              <b style={{ color: "#757575" }}>{PROJECT_MAP[selected]}</b>
             </button>
           </span>
         ),
@@ -338,7 +338,7 @@ export const App = () => {
               >
                 <mesh
                   position={OBJECT_POSITIONS.pen}
-                  scale={0.115}
+                  scale={0.15}
                   rotation={[Math.PI / 2, 0, -Math.PI / 1.5]}
                 >
                   <Pen />
@@ -464,7 +464,7 @@ export const App = () => {
         </Suspense>
         <OrbitControls
           makeDefault
-          enableZoom={false}
+          enableZoom={true}
           enablePan={dpr > 2 ? false : true}
           enableRotate={dpr > 2 ? false : true}
           rotateSpeed={0.65}

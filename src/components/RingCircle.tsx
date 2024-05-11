@@ -22,15 +22,15 @@ export default function RingCircle(props: {
     >
       <circleGeometry args={[0.2, 64]} />
       <MeshWobbleMaterial
-        factor={0.00015}
-        speed={props.selected ? 10 : 4}
+        factor={0.00025}
+        speed={props.selected ? 6 : 3}
         transparent
-        opacity={props.selected ? 0.65 : 0.15}
-        color={props.selected ? "white" : "lightgrey"}
+        opacity={props.selected ? 0.75 : 0.15}
+        color={props.selected ? "azure" : "lightgrey"}
       />
       <Edges
         threshold={90}
-        color={props.selected ? "darkgrey" : "grey"}
+        color={props.selected ? "black" : "grey"}
         visible={true}
       />
     </mesh>

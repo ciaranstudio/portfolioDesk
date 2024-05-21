@@ -21,10 +21,6 @@ import RingCircle from "./components/RingCircle";
 import { TOAST, OBJECT_POSITIONS, PROJECT_MAP } from "./constants";
 
 export const App = () => {
-  // toasts
-  const loadingToast = toast;
-  const urlToast = toast;
-
   // useRef
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -130,7 +126,7 @@ export const App = () => {
 
   // Loading in progress toast
   useEffect(() => {
-    loadingToast.loading("Loading...", {
+    toast.loading("Loading...", {
       id: "loadingToast",
       position: "bottom-center",
       style: {
@@ -150,7 +146,7 @@ export const App = () => {
     if (loaded === 28 && progress === 100) {
       window.document.body.style.cursor = "auto";
       setAppLoaded(true);
-      loadingToast.success("Welcome!", {
+      toast.success("Welcome!", {
         id: "loadingToast",
         position: "bottom-center",
         style: {
@@ -179,7 +175,7 @@ export const App = () => {
   // Click to open project url toast
   useEffect(() => {
     if (appLoaded)
-      urlToast(
+      toast(
         (_t) => (
           <span onClick={handleUrlToastClick}>
             <button

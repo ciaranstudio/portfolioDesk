@@ -37,10 +37,10 @@ function Root() {
         >
           ciaran okeeffe
           <br />
-          <i style={{ color: "grey", fontSize: "0.65rem" }}>web dev</i>
+          <i style={{ color: "grey", fontSize: "0.65rem" }}>developer</i>
         </a>
         <a
-          href="https://github.com/chairawn/"
+          href="https://github.com/ciaranstudio/"
           target="_blank"
           rel="noopener noreferrer"
           style={{

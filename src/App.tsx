@@ -21,13 +21,16 @@ import RingCircle from "./components/RingCircle";
 import { TOAST, OBJECT_POSITIONS, PROJECT_MAP } from "./constants";
 
 export const App = () => {
+  // items to load count from useProgress hook
+  const LOADED_COUNT = 28;
+
   // useRef
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // useState
   const [hovered, hover] = useState(false);
-  const [selected, setSelected] = useState("");
-  const [url, setUrl] = useState("");
+  const [selected, setSelected] = useState("sphere");
+  const [url, setUrl] = useState("https://partlist-e9fc0.web.app/debug");
 
   const [height, setHeight] = useState("100dvh");
   const [dpr, setDpr] = useState(0);
@@ -128,7 +131,7 @@ export const App = () => {
   useEffect(() => {
     toast.loading("Loading...", {
       id: "loadingToast",
-      position: "bottom-center",
+      position: "top-center",
       style: {
         fontSize: TOAST.fontSize,
         background: TOAST.background,
@@ -143,12 +146,12 @@ export const App = () => {
   useEffect(() => {
     console.log("loaded: ", loaded);
     console.log("progress: ", progress);
-    if (loaded === 28 && progress === 100) {
+    if (loaded === LOADED_COUNT && progress === 100) {
       window.document.body.style.cursor = "auto";
       setAppLoaded(true);
       toast.success("Welcome!", {
         id: "loadingToast",
-        position: "bottom-center",
+        position: "top-center",
         style: {
           fontSize: TOAST.fontSize,
           background: TOAST.background,
@@ -160,7 +163,7 @@ export const App = () => {
       toast("Tap items to show projects", {
         id: "instructionsToast1",
         duration: TOAST.duration,
-        position: isMobile ? "bottom-center" : "bottom-center",
+        position: isMobile ? "top-right" : "top-center",
         style: {
           fontSize: TOAST.fontSize,
           background: TOAST.background,
@@ -198,7 +201,7 @@ export const App = () => {
         {
           id: "urlToast",
           duration: Infinity,
-          position: isMobile ? "bottom-center" : "bottom-center",
+          position: isMobile ? "top-right" : "top-center",
           style: {
             fontSize: TOAST.fontSize,
             background: TOAST.background,

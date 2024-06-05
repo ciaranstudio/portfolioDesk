@@ -30,7 +30,7 @@ export const App = () => {
   // useState
   const [hovered, hover] = useState(false);
   const [selected, setSelected] = useState("sphere");
-  const [url, setUrl] = useState("https://partlist-e9fc0.web.app/debug");
+  const [url, setUrl] = useState("");
 
   const [height, setHeight] = useState("100dvh");
   const [dpr, setDpr] = useState(0);
@@ -111,6 +111,21 @@ export const App = () => {
     };
   }, []);
 
+  // Loading in progress toast
+  useEffect(() => {
+    toast.loading("Loading...", {
+      id: "loadingToast",
+      position: isMobile ? "bottom-center" : "bottom-center",
+      style: {
+        fontSize: TOAST.fontSize,
+        background: TOAST.background,
+        color: TOAST.color,
+        fontFamily: "var(--leva-fonts-mono)",
+        borderTop: "0.1rem solid #e0e0e0,",
+      },
+    });
+  }, []);
+
   // If view is zoomed in / resized during experience then update height to 100 svh
   useEffect(() => {
     // console.log("zoomLevelWebkit: ", zoomLevelWebkit);
@@ -127,21 +142,6 @@ export const App = () => {
     }
   }, [roundedZoomWebkit]);
 
-  // Loading in progress toast
-  useEffect(() => {
-    toast.loading("Loading...", {
-      id: "loadingToast",
-      position: "top-center",
-      style: {
-        fontSize: TOAST.fontSize,
-        background: TOAST.background,
-        color: TOAST.color,
-        fontFamily: "var(--leva-fonts-mono)",
-        borderTop: "0.1rem solid #e0e0e0,",
-      },
-    });
-  }, []);
-
   // Welcome toast, instructions for how to use site on initial load
   useEffect(() => {
     console.log("loaded: ", loaded);
@@ -149,9 +149,10 @@ export const App = () => {
     if (loaded === LOADED_COUNT && progress === 100) {
       window.document.body.style.cursor = "auto";
       setAppLoaded(true);
+      setUrl("https://partlist-e9fc0.web.app/debug");
       toast.success("Welcome!", {
         id: "loadingToast",
-        position: "top-center",
+        position: isMobile ? "bottom-center" : "bottom-center",
         style: {
           fontSize: TOAST.fontSize,
           background: TOAST.background,
@@ -163,7 +164,7 @@ export const App = () => {
       toast("Tap items to show projects", {
         id: "instructionsToast1",
         duration: TOAST.duration,
-        position: isMobile ? "top-right" : "top-center",
+        position: isMobile ? "top-center" : "top-center",
         style: {
           fontSize: TOAST.fontSize,
           background: TOAST.background,
@@ -201,7 +202,7 @@ export const App = () => {
         {
           id: "urlToast",
           duration: Infinity,
-          position: isMobile ? "top-right" : "top-center",
+          position: isMobile ? "bottom-center" : "top-center",
           style: {
             fontSize: TOAST.fontSize,
             background: TOAST.background,

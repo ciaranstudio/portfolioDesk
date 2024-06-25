@@ -29,7 +29,7 @@ export const App = () => {
 
   // useState
   const [hovered, hover] = useState(false);
-  const [selected, setSelected] = useState("sphere");
+  const [selected, setSelected] = useState("stool");
   const [url, setUrl] = useState("");
 
   const [height, setHeight] = useState("100dvh");
@@ -144,12 +144,12 @@ export const App = () => {
 
   // Welcome toast, instructions for how to use site on initial load
   useEffect(() => {
-    console.log("loaded: ", loaded);
-    console.log("progress: ", progress);
+    // console.log("loaded: ", loaded);
+    // console.log("progress: ", progress);
     if (loaded === LOADED_COUNT && progress === 100) {
       window.document.body.style.cursor = "auto";
       setAppLoaded(true);
-      setUrl("https://partlist-e9fc0.web.app/debug");
+      setUrl("https://elibuildslite.web.app");
       toast.success("Welcome!", {
         id: "loadingToast",
         position: isMobile ? "bottom-center" : "bottom-center",

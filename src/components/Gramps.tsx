@@ -15,7 +15,7 @@ export default function Gramps() {
   const [map, normalMap, roughnessMap, metalnessMap] = useTexture(blackTexture);
 
   useLayoutEffect(() => {
-    console.log("materials: ", materials);
+    // console.log("materials: ", materials);
     Object.assign(materials.Material, {
       map: map,
       normalMap: normalMap,

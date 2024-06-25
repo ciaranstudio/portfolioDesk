@@ -8,7 +8,7 @@ export default function Mug() {
   const lightGrey = new THREE.Color(0xd3d3d3);
 
   useLayoutEffect(() => {
-    console.log("materials: ", materials);
+    // console.log("materials: ", materials);
     scene.traverse((o) => {
       if ((o as THREE.Mesh).isMesh) {
         o.castShadow = true;

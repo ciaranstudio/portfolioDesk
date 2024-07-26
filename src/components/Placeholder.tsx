@@ -17,12 +17,12 @@ export default function Placeholder() {
   return (
     <group ref={groupRef} scale={3}>
       <mesh ref={innerBoxRef}>
-        <boxGeometry args={[24, 24, 24, 4, 4, 4]} />
-        <meshBasicMaterial wireframe color={"grey"} depthTest={false} />
+        <boxGeometry args={[10, 10, 10, 4, 4, 4]} />
+        <meshBasicMaterial wireframe color={"orange"} depthTest={false} />
       </mesh>
       <mesh ref={outerBoxRef}>
-        <boxGeometry args={[36, 36, 36, 4, 4, 4]} />
-        <meshBasicMaterial wireframe color={"darkgrey"} depthTest={false} />
+        <boxGeometry args={[16, 16, 16, 4, 4, 4]} />
+        <meshBasicMaterial wireframe color={"lightBlue"} depthTest={false} />
       </mesh>
     </group>
   );

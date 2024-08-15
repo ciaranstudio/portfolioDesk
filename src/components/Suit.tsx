@@ -35,7 +35,11 @@ interface MyGLTFResult extends GLTFResult {
   animations: GLTFAction[];
 }
 
-export default function Suit(props: JSX.IntrinsicElements["group"]) {
+interface ISuitProps {
+  isTouchScreen: boolean;
+}
+
+export default function Suit(props: ISuitProps) {
   const group = useRef<THREE.Group>(null);
   const { nodes, materials, animations } = useGLTF(
     "/models/joe$@idle.glb",
@@ -49,10 +53,10 @@ export default function Suit(props: JSX.IntrinsicElements["group"]) {
   //     });
   //   }, []);
   useEffect(() => {
-    actions["Armature|mixamo.com|Layer0"]?.play();
+    if (!props.isTouchScreen) actions["Armature|mixamo.com|Layer0"]?.play();
   }, []);
   return (
-    <group ref={group} {...props} dispose={null}>
+    <group ref={group} dispose={null}>
       <group name="Scene">
         <group name="Armature" rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
           <skinnedMesh

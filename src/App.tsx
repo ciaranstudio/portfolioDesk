@@ -31,6 +31,8 @@ export const App = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // useState
+  const [isTouchScreen, setIsTouchScreen] = useState(false);
+
   const [hovered, hover] = useState(false);
   const [selected, setSelected] = useState("stool");
   const [url, setUrl] = useState("");
@@ -62,6 +64,13 @@ export const App = () => {
         // prevent swipe to navigate gesture
         e.preventDefault();
       });
+
+    // Check if using a touch control device, show/hide joystick
+    if ("ontouchstart" in window || navigator.maxTouchPoints > 0) {
+      setIsTouchScreen(true);
+    } else {
+      setIsTouchScreen(false);
+    }
 
     return () => {
       if (element)
@@ -403,7 +412,7 @@ export const App = () => {
                 }}
               >
                 <mesh position={OBJECT_POSITIONS.suit} scale={0.12}>
-                  <Suit />
+                  <Suit isTouchScreen={isTouchScreen} />
                 </mesh>
                 <RingCircle
                   position={OBJECT_POSITIONS.suit}

@@ -397,11 +397,7 @@ export const App = () => {
                 onPointerOver={() => hover(true)}
                 onPointerOut={() => hover(false)}
                 onClick={(e) => {
-                  handleObjectClick(
-                    e,
-                    "suit",
-                    "https://partlist-e9fc0.web.app/admin",
-                  );
+                  handleObjectClick(e, "suit", "https://corphop-db635.web.app");
                 }}
               >
                 <mesh position={OBJECT_POSITIONS.suit} scale={0.12}>

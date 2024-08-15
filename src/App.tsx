@@ -14,16 +14,19 @@ import Laptop from "./components/Laptop";
 import Van from "./components/Van";
 import Gramps from "./components/Gramps";
 import Placeholder from "./components/Placeholder";
-import Pen from "./components/Pen";
+// import Pen from "./components/Pen";
+import Suit from "./components/Suit";
 import Mug from "./components/Mug";
 import Headphones from "./components/Headphones";
 import RingCircle from "./components/RingCircle";
-import { TOAST, OBJECT_POSITIONS, PROJECT_MAP } from "./constants";
+import {
+  LOADED_COUNT,
+  TOAST,
+  OBJECT_POSITIONS,
+  PROJECT_MAP,
+} from "./constants";
 
 export const App = () => {
-  // items to load count from useProgress hook
-  const LOADED_COUNT = 28;
-
   // useRef
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -144,8 +147,8 @@ export const App = () => {
 
   // Welcome toast, instructions for how to use site on initial load
   useEffect(() => {
-    // console.log("loaded: ", loaded);
-    // console.log("progress: ", progress);
+    console.log("loaded: ", loaded);
+    console.log("progress: ", progress);
     if (loaded === LOADED_COUNT && progress === 100) {
       window.document.body.style.cursor = "auto";
       setAppLoaded(true);
@@ -247,7 +250,7 @@ export const App = () => {
     url: React.SetStateAction<string> | string,
   ) => {
     e.stopPropagation();
-    console.log("e: ", e);
+    // console.log("e: ", e);
     setUrl(url);
     setSelected(selected);
   };
@@ -291,40 +294,6 @@ export const App = () => {
                 intensity={3}
               />
 
-              {/* Mug */}
-              <mesh
-                position={OBJECT_POSITIONS.mug}
-                scale={0.15}
-                rotation={[0, Math.PI / 5.75, 0]}
-              >
-                <Mug />
-              </mesh>
-
-              {/* Pen */}
-              <group
-                onPointerOver={() => hover(true)}
-                onPointerOut={() => hover(false)}
-                onClick={(e) => {
-                  handleObjectClick(
-                    e,
-                    "pen",
-                    "https://partlist-e9fc0.web.app/admin",
-                  );
-                }}
-              >
-                <mesh
-                  position={OBJECT_POSITIONS.pen}
-                  scale={0.15}
-                  rotation={[Math.PI / 2, 0, -Math.PI / 1.5]}
-                >
-                  <Pen />
-                </mesh>
-                <RingCircle
-                  position={OBJECT_POSITIONS.pen}
-                  selected={selected === "pen"}
-                />
-              </group>
-
               {/* Headphones */}
               <mesh
                 position={OBJECT_POSITIONS.headphones}
@@ -333,6 +302,31 @@ export const App = () => {
               >
                 <Headphones />
               </mesh>
+
+              {/* Van */}
+              <group
+                onPointerOver={() => hover(true)}
+                onPointerOut={() => hover(false)}
+                onClick={(e) => {
+                  handleObjectClick(
+                    e,
+                    "van",
+                    "https://gardencenter-c902f.web.app",
+                  );
+                }}
+              >
+                <mesh
+                  scale={0.115}
+                  position={OBJECT_POSITIONS.van}
+                  rotation={[0, Math.PI / 6, 0]}
+                >
+                  <Van />
+                </mesh>
+                <RingCircle
+                  position={OBJECT_POSITIONS.van}
+                  selected={selected === "van"}
+                />
+              </group>
 
               {/* Distorted sphere */}
               <group
@@ -373,33 +367,49 @@ export const App = () => {
                 />
               </group>
 
-              {/* Laptop */}
-              <mesh scale={0.3} position={OBJECT_POSITIONS.laptop}>
-                <Laptop dpr={dpr} url={url} />
-              </mesh>
+              {/* Pen */}
+              {/* <group
+                onPointerOver={() => hover(true)}
+                onPointerOut={() => hover(false)}
+                onClick={(e) => {
+                  handleObjectClick(
+                    e,
+                    "pen",
+                    "https://partlist-e9fc0.web.app/admin",
+                  );
+                }}
+              >
+                <mesh
+                  position={OBJECT_POSITIONS.pen}
+                  scale={0.15}
+                  rotation={[Math.PI / 2, 0, -Math.PI / 1.5]}
+                >
+                  <Pen />
+                </mesh>
+                <RingCircle
+                  position={OBJECT_POSITIONS.pen}
+                  selected={selected === "pen"}
+                />
+              </group> */}
 
-              {/* Van */}
+              {/* Suit */}
               <group
                 onPointerOver={() => hover(true)}
                 onPointerOut={() => hover(false)}
                 onClick={(e) => {
                   handleObjectClick(
                     e,
-                    "van",
-                    "https://gardencenter-c902f.web.app",
+                    "suit",
+                    "https://partlist-e9fc0.web.app/admin",
                   );
                 }}
               >
-                <mesh
-                  scale={0.115}
-                  position={OBJECT_POSITIONS.van}
-                  rotation={[0, Math.PI / 6, 0]}
-                >
-                  <Van />
+                <mesh position={OBJECT_POSITIONS.suit} scale={0.12}>
+                  <Suit />
                 </mesh>
                 <RingCircle
-                  position={OBJECT_POSITIONS.van}
-                  selected={selected === "van"}
+                  position={OBJECT_POSITIONS.suit}
+                  selected={selected === "suit"}
                 />
               </group>
 
@@ -427,6 +437,20 @@ export const App = () => {
                   selected={selected === "stool"}
                 />
               </group>
+
+              {/* Mug */}
+              <mesh
+                position={OBJECT_POSITIONS.mug}
+                scale={0.15}
+                rotation={[0, Math.PI / 5.75, 0]}
+              >
+                <Mug />
+              </mesh>
+
+              {/* Laptop */}
+              <mesh scale={0.3} position={OBJECT_POSITIONS.laptop}>
+                <Laptop dpr={dpr} url={url} />
+              </mesh>
 
               {/* Desk */}
               <mesh

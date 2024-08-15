@@ -18,7 +18,6 @@ export default function RingCircle(props: {
       rotation-y={0}
       scale={props.selected ? 0.8 : 0.7}
       receiveShadow
-      castShadow
     >
       <circleGeometry args={[0.2, 64]} />
       <MeshWobbleMaterial

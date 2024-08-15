@@ -37,6 +37,7 @@ interface MyGLTFResult extends GLTFResult {
 
 interface ISuitProps {
   isTouchScreen: boolean;
+  selected: string;
 }
 
 export default function Suit(props: ISuitProps) {
@@ -53,8 +54,12 @@ export default function Suit(props: ISuitProps) {
   //     });
   //   }, []);
   useEffect(() => {
-    if (!props.isTouchScreen) actions["Armature|mixamo.com|Layer0"]?.play();
-  }, []);
+    if (props.selected === "suit") {
+      actions["Armature|mixamo.com|Layer0"]?.play();
+    } else {
+      actions["Armature|mixamo.com|Layer0"]?.stop();
+    }
+  }, [props.selected]);
   return (
     <group ref={group} dispose={null}>
       <group name="Scene">

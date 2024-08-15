@@ -322,7 +322,7 @@ export const App = () => {
                   handleObjectClick(
                     e,
                     "van",
-                    "https://gardencenterlite.web.app",
+                    "https://elibuildslite.web.app", // https://gardencenterlite.web.app
                   );
                 }}
               >
@@ -408,11 +408,11 @@ export const App = () => {
                 onPointerOver={() => hover(true)}
                 onPointerOut={() => hover(false)}
                 onClick={(e) => {
-                  handleObjectClick(e, "suit", "https://corphop-db635.web.app");
+                  handleObjectClick(e, "suit", "https://elibuildslite.web.app"); //  https://corphop-db635.web.app
                 }}
               >
                 <mesh position={OBJECT_POSITIONS.suit} scale={0.12}>
-                  <Suit isTouchScreen={isTouchScreen} />
+                  <Suit isTouchScreen={isTouchScreen} selected={selected} />
                 </mesh>
                 <RingCircle
                   position={OBJECT_POSITIONS.suit}

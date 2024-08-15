@@ -260,6 +260,8 @@ export const App = () => {
     toast.dismiss("instructionsToast1");
     if (url === "https://elibuildslite.web.app") {
       window.open("https://elibuilds-998b8.web.app", "_blank", "noreferrer");
+    } else if (url === "https://gardencenterlite.web.app") {
+      window.open("https://gardencenter-c902f.web.app", "_blank", "noreferrer");
     } else window.open(url, "_blank", "noreferrer");
   };
 
@@ -311,7 +313,7 @@ export const App = () => {
                   handleObjectClick(
                     e,
                     "van",
-                    "https://gardencenter-c902f.web.app",
+                    "https://gardencenterlite.web.app",
                   );
                 }}
               >

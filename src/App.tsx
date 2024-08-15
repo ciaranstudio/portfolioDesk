@@ -264,6 +264,7 @@ export const App = () => {
     setSelected(selected);
   };
 
+  // https://corphoplite.web.app
   const handleUrlToastClick = (e: { stopPropagation: () => void }) => {
     e.stopPropagation();
     toast.dismiss("instructionsToast1");
@@ -271,6 +272,8 @@ export const App = () => {
       window.open("https://elibuilds-998b8.web.app", "_blank", "noreferrer");
     } else if (url === "https://gardencenterlite.web.app") {
       window.open("https://gardencenter-c902f.web.app", "_blank", "noreferrer");
+    } else if (url === "https://corphoplite.web.app") {
+      window.open("https://corphop-db635.web.app", "_blank", "noreferrer");
     } else window.open(url, "_blank", "noreferrer");
   };
 
@@ -322,7 +325,7 @@ export const App = () => {
                   handleObjectClick(
                     e,
                     "van",
-                    "https://gardencenterlite.web.app", // https://gardencenterlite.web.app
+                    "https://gardencenterlite.web.app",
                   );
                 }}
               >
@@ -408,7 +411,7 @@ export const App = () => {
                 onPointerOver={() => hover(true)}
                 onPointerOut={() => hover(false)}
                 onClick={(e) => {
-                  handleObjectClick(e, "suit", "https://elibuildslite.web.app"); //  https://corphop-db635.web.app
+                  handleObjectClick(e, "suit", "https://corphoplite.web.app");
                 }}
               >
                 <mesh position={OBJECT_POSITIONS.suit} scale={0.12}>

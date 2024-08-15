@@ -322,7 +322,7 @@ export const App = () => {
                   handleObjectClick(
                     e,
                     "van",
-                    "https://elibuildslite.web.app", // https://gardencenterlite.web.app
+                    "https://gardencenterlite.web.app", // https://gardencenterlite.web.app
                   );
                 }}
               >

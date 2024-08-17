@@ -21,8 +21,9 @@ type GLTFResult = GLTF & {
     mixamorig7Hips: THREE.Bone;
   };
   materials: {
-    Ch33_body: THREE.MeshPhysicalMaterial;
-    Ch33_hair: THREE.MeshPhysicalMaterial;
+    ["Material.001"]: THREE.MeshStandardMaterial;
+    ["Material.003"]: THREE.MeshStandardMaterial;
+    ["Material.002"]: THREE.MeshStandardMaterial;
   };
 };
 
@@ -43,7 +44,7 @@ interface ISuitProps {
 export default function Suit(props: ISuitProps) {
   const group = useRef<THREE.Group>(null);
   const { nodes, materials, animations } = useGLTF(
-    "/models/joe$@idle.glb",
+    "/models/joe$@idleUSE.glb",
   ) as MyGLTFResult;
   const { actions } = useAnimations<GLTFAction>(animations, group);
   //   useLayoutEffect(() => {
@@ -67,59 +68,59 @@ export default function Suit(props: ISuitProps) {
           <skinnedMesh
             name="Ch33_Belt"
             geometry={nodes.Ch33_Belt.geometry}
-            material={materials.Ch33_body}
+            material={materials["Material.001"]}
             skeleton={nodes.Ch33_Belt.skeleton}
           />
           <skinnedMesh
             name="Ch33_Body"
             geometry={nodes.Ch33_Body.geometry}
-            material={materials.Ch33_body}
+            material={materials["Material.003"]}
             skeleton={nodes.Ch33_Body.skeleton}
             castShadow
           />
           <skinnedMesh
             name="Ch33_Eyelashes"
             geometry={nodes.Ch33_Eyelashes.geometry}
-            material={materials.Ch33_hair}
+            material={materials["Material.001"]}
             skeleton={nodes.Ch33_Eyelashes.skeleton}
           />
           <skinnedMesh
             name="Ch33_Hair"
             geometry={nodes.Ch33_Hair.geometry}
-            material={materials.Ch33_hair}
+            material={materials["Material.001"]}
             skeleton={nodes.Ch33_Hair.skeleton}
           />
           <skinnedMesh
             name="Ch33_Pants"
             geometry={nodes.Ch33_Pants.geometry}
-            material={materials.Ch33_body}
+            material={materials["Material.001"]}
             skeleton={nodes.Ch33_Pants.skeleton}
             castShadow
           />
           <skinnedMesh
             name="Ch33_Shirt"
             geometry={nodes.Ch33_Shirt.geometry}
-            material={materials.Ch33_body}
+            material={materials["Material.002"]}
             skeleton={nodes.Ch33_Shirt.skeleton}
           />
           <skinnedMesh
             name="Ch33_Shoes"
             geometry={nodes.Ch33_Shoes.geometry}
-            material={materials.Ch33_body}
+            material={materials["Material.001"]}
             skeleton={nodes.Ch33_Shoes.skeleton}
             castShadow
           />
           <skinnedMesh
             name="Ch33_Suit"
             geometry={nodes.Ch33_Suit.geometry}
-            material={materials.Ch33_body}
+            material={materials["Material.001"]}
             skeleton={nodes.Ch33_Suit.skeleton}
             castShadow
           />
           <skinnedMesh
             name="Ch33_Tie"
             geometry={nodes.Ch33_Tie.geometry}
-            material={materials.Ch33_body}
+            material={materials["Material.001"]}
             skeleton={nodes.Ch33_Tie.skeleton}
           />
           <primitive object={nodes.mixamorig7Hips} />

@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-export const LOADED_COUNT = 35;
+export const LOADED_COUNT = 29;
 
 export const PROJECT_MAP: Record<string, any> = {
   van: "GardenCenter",

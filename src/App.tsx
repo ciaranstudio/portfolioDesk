@@ -156,8 +156,8 @@ export const App = () => {
 
   // Welcome toast, instructions for how to use site on initial load
   useEffect(() => {
-    console.log("loaded: ", loaded);
-    console.log("progress: ", progress);
+    // console.log("loaded: ", loaded);
+    // console.log("progress: ", progress);
     if (loaded === LOADED_COUNT && progress === 100) {
       window.document.body.style.cursor = "auto";
       setAppLoaded(true);

@@ -62,7 +62,7 @@ function Root() {
             cursor: "pointer",
             color: "#808080",
           }}
-          onClick={(e) => {
+          onClick={(e: { stopPropagation: () => void }) => {
             e.stopPropagation();
             const email = "ciaranstudio@icloud.com";
             const subject = "Contact from portfolio";

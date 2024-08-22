@@ -214,7 +214,7 @@ export const App = () => {
         {
           id: "urlToast",
           duration: Infinity,
-          position: isMobile ? "bottom-center" : "top-center",
+          position: isMobile ? "bottom-center" : "bottom-center",
           style: {
             fontSize: TOAST.fontSize,
             background: TOAST.background,
@@ -269,14 +269,16 @@ export const App = () => {
     e.stopPropagation();
     toast.dismiss("instructionsToast1");
     if (url === "https://elibuildslite.web.app") {
-      window.open("https://elibuilds-998b8.web.app", "_blank", "noreferrer");
+      window.open("https://eligfell.com", "_blank", "noreferrer");
     } else if (url === "https://gardencenterlite.web.app") {
       window.open("https://gardencenter-c902f.web.app", "_blank", "noreferrer");
     } else if (
       url === "https://corphoplite.web.app" ||
       url === "https://corphoplite2.web.app"
     ) {
-      window.open("https://corphop-db635.web.app", "_blank", "noreferrer");
+      isMobile
+        ? window.open("https://corphoplite.web.app", "_blank", "noreferrer")
+        : window.open("https://corphop-db635.web.app", "_blank", "noreferrer");
     } else window.open(url, "_blank", "noreferrer");
   };
 
@@ -418,7 +420,7 @@ export const App = () => {
                     e,
                     "suit",
                     isTouchScreen
-                      ? "https://corphoplite2.web.app"
+                      ? "https://corphoplite.web.app" // "https://corphoplite2.web.app"
                       : "https://corphoplite.web.app",
                   );
                 }}
